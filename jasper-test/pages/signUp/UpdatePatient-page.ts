@@ -30,9 +30,12 @@ export class UpdatePatientPage {
     this.password = '123456'
   }
 
-  async waitForLoaded() {
-    
+  async waitForLoadedPatien() {
     await this.page.waitForURL('/onboarding/patient')
+  }
+
+  async waitForLoadedCaregiver() {
+    await this.page.waitForURL('/onboarding/caregiver')
   }
 
   async inputFirstNameField(name: string) {
@@ -43,7 +46,7 @@ export class UpdatePatientPage {
     await this.lastNameField.fill(option)
   }
 
-  async inputEmailField(option = `ivantest+fake${faker.datatype.bigInt({ min: 10000n, max: 99999n })}@spsoft.com`) {
+  async inputEmailField(option = `${faker.name.lastName()}+fake${faker.datatype.bigInt({ min: 100000n, max: 999999n })}@spsoft.com`) {
     await this.emailField.fill(option)
   }
 

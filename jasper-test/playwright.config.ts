@@ -7,7 +7,8 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 15000
   },
-  fullyParallel: true,
+  fullyParallel: false,
+  reportSlowTests: { max: 0, threshold: 60001 },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -44,12 +45,12 @@ const config: PlaywrightTestConfig = {
     //   },
     // },
 
-    // {
-    //   name: 'webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //   },
-    // },
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
+      },
+    },
 
     /* Test against mobile viewports. */
     // {

@@ -13,6 +13,10 @@ export class AddDiagnosesPage {
     await this.page.locator('[data-testing="typography-form-layout-title"]').waitFor()
   }
 
+  async waitForLoadedCaregiver() {
+    await this.page.waitForURL('/onboarding/caregiver/add-diagnoses')
+  }
+
   async selectDiagnoses(diagnoses: 'Bladder' | 'Breast' | 'Colon' | 'Liver') {
     await this.page.locator(`[data-testing="checkbox-field:{diagnoses}:{${diagnoses}}"]`).click()
   }

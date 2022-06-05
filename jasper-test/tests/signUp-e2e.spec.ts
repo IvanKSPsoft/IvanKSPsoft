@@ -16,8 +16,8 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/login')
   await page.locator('[data-testing="button-submit"]').waitFor()
 });
-
-test.describe('Sign-up', () => {
+test.describe.configure({ mode: 'parallel' })
+test.describe('Sign-up' , () => {
   test('Sign Up As A Patient (option 1)', async ({ page }) => {
     const loginPage = new LoginPage(page),
           roleSelectionPage = new RoleSelectionPage(page),
@@ -35,7 +35,7 @@ test.describe('Sign-up', () => {
     await loginPage.clickSignUpBtn()
     await roleSelectionPage.waitForLoaded()
     await roleSelectionPage.selectPatientOption1()
-    await updatePatientpage.waitForLoaded()
+    await updatePatientpage.waitForLoadedPatien()
     await updatePatientpage.inputFirstNameField(name)
     await updatePatientpage.inputLastNameField()
     await updatePatientpage.inputEmailField()
@@ -67,6 +67,54 @@ test.describe('Sign-up', () => {
     await homePage.observeWelcomTitle(name)
   })
 
+  test.only('Sign Up As A Caregiver (option 4)', async ({ page }) => {
+    const loginPage = new LoginPage(page),
+          roleSelectionPage = new RoleSelectionPage(page),
+          comonActions = new CommonActionsPage(page),
+          homePage = new HomePage(page),
+          updatePatientpage = new UpdatePatientPage(page),
+          welcomePage = new WelcomePage(page),
+          acountDetailesPage = new AccountDetailsPage(page),
+          addInterstPage = new AddInterestsPage(page),
+          addDiagnosesPage = new AddDiagnosesPage(page),
+          addTreatmentPage = new AddTreatmentPage(page),
+          name = faker.name.firstName(),
+          patientName = faker.name.firstName()
+    
+    await loginPage.clickSignUpBtn()
+    await roleSelectionPage.waitForLoaded()
+    await roleSelectionPage.selectCaregiver()
+    await updatePatientpage.waitForLoadedCaregiver()
+    await updatePatientpage.inputFirstNameField(name)
+    await updatePatientpage.inputLastNameField()
+    await updatePatientpage.inputEmailField()
+    await updatePatientpage.inputPasswordField()
+    await updatePatientpage.inputConfirmPasswordField()
+    await updatePatientpage.clickSMSContentCheckbox()
+    await comonActions.clickContinueBtn()
+    await welcomePage.waitForLoadedCaregiver()
+    await welcomePage.checkName(name)
+    await comonActions.clickContinueBtn()
+    await acountDetailesPage.waitForLoadedCaregiver()
+    await acountDetailesPage.inpurPatientData(patientName)
+    await acountDetailesPage.inputZipCodeField()
+    await acountDetailesPage.selectAgeGroup('65+ years')
+    await acountDetailesPage.selectSex('Female')
+    await comonActions.clickContinueBtn()
+    await addDiagnosesPage.waitForLoadedCaregiver()
+    await addDiagnosesPage.selectDiagnoses('Bladder')
+    await comonActions.clickContinueBtn()
+    await addTreatmentPage.waitForLoadedCaregiver()
+    await addTreatmentPage.selectTreatment()
+    await addTreatmentPage.clickAddAppointmentBtn()
+    await comonActions.clickContinueBtn()
+    await addInterstPage.waitForLoadedCaregiver()
+    await addInterstPage.selectInerest('Pet Care')
+    await comonActions.clickContinueBtn()
+    await homePage.waitForloaded()
+    await homePage.observeWelcomTitle(name)
+  })
+
   test('Sign Up As A Patient (option 3)', async ({ page }) => {
     const loginPage = new LoginPage(page),
           roleSelectionPage = new RoleSelectionPage(page),
@@ -84,7 +132,7 @@ test.describe('Sign-up', () => {
     await loginPage.clickSignUpBtn()
     await roleSelectionPage.waitForLoaded()
     await roleSelectionPage.selectPatientOption3()
-    await updatePatientpage.waitForLoaded()
+    await updatePatientpage.waitForLoadedPatien()
     await updatePatientpage.inputFirstNameField(name)
     await updatePatientpage.inputLastNameField()
     await updatePatientpage.inputEmailField()

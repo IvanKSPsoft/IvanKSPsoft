@@ -11,8 +11,11 @@ export class WelcomePage {
   }
 
   async waitForLoaded() {
-    
     await this.page.waitForURL('/onboarding/patient/welcome')
+  }
+
+  async waitForLoadedCaregiver() {
+    await this.page.waitForURL('/onboarding/caregiver/welcome')
   }
 
   async checkName(name: string) {

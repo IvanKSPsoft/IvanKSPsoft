@@ -42,6 +42,10 @@ export class AddTreatmentPage {
     await this.page.locator('[data-testing="typography-form-layout-title"]').waitFor()
   }
 
+  async waitForLoadedCaregiver() {
+    await this.page.waitForURL('/onboarding/caregiver/add-treatments')
+  }
+
   async clickAddTreatmentBtn() {
     await this.addTreatmentBtn.click()
     await this.page.locator('//div[contains(text(), "Add Treatment")]').waitFor()

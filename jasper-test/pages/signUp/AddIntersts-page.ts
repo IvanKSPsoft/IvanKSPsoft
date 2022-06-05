@@ -14,6 +14,10 @@ export class AddInterestsPage {
     await this.page.waitForURL('/onboarding/patient/add-interests')
   }
 
+  async waitForLoadedCaregiver() {
+    await this.page.waitForURL('/onboarding/caregiver/add-interests')
+  }
+
   async selectInerest(interest: 'Child Care' | 'Entertainment' | 'Pet Care' | 'Sexual Health') {
     await this.page.locator(`[data-testing="checkbox-field:{interests}:{${interest}}"]`).click()
   }

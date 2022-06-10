@@ -9,6 +9,7 @@ export class MainPage {
     closWelocoModalBtn: Locator;
     serachInput: Locator;
     labAddrees: string;
+  labAddrees2: string;
     
 
 
@@ -23,6 +24,7 @@ export class MainPage {
     this.closWelocoModalBtn = page.locator(closWelocoModalBtnLocator)
     this.serachInput = page.locator(searchInputLocator)
     this.labAddrees = 'Walmart Neighborhood Market, 1001, East Main Street, Yukon, Canadian County, Oklahoma, 73099, United States'
+    this.labAddrees2 = 'Marriott Vacation Club, New York City, 33, West 37th Street, Midtown South, Manhattan Community Board 5, New York County, City of New York, New York, 10018, United States'
     
   }
 

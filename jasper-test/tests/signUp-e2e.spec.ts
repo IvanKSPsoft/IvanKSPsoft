@@ -67,7 +67,7 @@ test.describe('Sign-up' , () => {
     await homePage.observeWelcomTitle(name)
   })
 
-  test.only('Sign Up As A Caregiver (option 4)', async ({ page }) => {
+  test('Sign Up As A Caregiver (option 4)', async ({ page }) => {
     const loginPage = new LoginPage(page),
           roleSelectionPage = new RoleSelectionPage(page),
           comonActions = new CommonActionsPage(page),

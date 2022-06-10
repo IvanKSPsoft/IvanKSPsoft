@@ -55,7 +55,7 @@ test('ui controls', async ({ page }) => {
     console.log(await cardTiele.allTextContents())
 })
 
-test.only('child window', async ({ browser }) => {
+test('child window', async ({ browser }) => {
     
     const context = await browser.newContext()
     const page = await context.newPage()

@@ -274,5 +274,19 @@ export class PaymentPage {
     console.log(this.insurancePrice.allTextContents())
   }
 
+  async qestionaryNewYork() {
+    await this.firstQuestion('No')
+    await this.symptomQuestion('No')
+    await this.orderdingQuestion('Yes')
+    await this.firstCovidQuestion('Yes')
+    await this.previoslyDiagnosQuestion('No')
+    await this.yourSymtopmsDiagnosQuestion('No')
+    await this.medicalConditionsQuestion('No')
+    await this.residenceQuestion('No')
+    await this.raceQuestion()
+    await this.latinoQuestion()
+    await this.healthCareEmployedQuestion('No')
+  }
+
 
 }

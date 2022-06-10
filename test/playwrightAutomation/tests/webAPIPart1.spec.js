@@ -1,18 +1,32 @@
-const { test } = require('@playwright/test')
-const { expect } = require('../playwright.config')
+const { test, request, expect} = require('@playwright/test')
+const loginPayload = {userEmail: "ivan.kovalov@spsoft.com", userPassword: "P@ssw0rd1"}
+let token = ''
+
+test.beforeAll(async () => {
+const API = await request.newContext()
+const loginResponse = await API.post('https://rahulshettyacademy.com/api/ecom/auth/login', {
+     data: loginPayload 
+    })
+    expect(loginResponse.ok()).toBeTruthy()
+    const lognResponseJson = await loginResponse.json()
+    token = lognResponseJson.token
+    console.log(token)
+})
+
+
 
 test('First test', async ({page}) => {
+    console.log(token)
+    page.addInitScript(value => {
+        window.localStorage.setItem('token', value)
+    }, token);
+
     const productName = 'adidas original'
     const products = page.locator('.card-body')
-    await page.goto('https://rahulshettyacademy.com/client/')
-    await page.fill('#userEmail', 'ivan.kovalov@spsoft.com')
-    await page.fill('#userPassword', 'P@ssw0rd1')
-    await page.click('#login')
-    await page.waitForLoadState('networkidle')
     const title = await page.locator('.card-body h5').allTextContents()
-    
-    console.log(title)
-    console.log(title[1])
+    await page.goto('https://rahulshettyacademy.com/client/')
+    // console.log(title)
+    // console.log(title[1])
     const count = await products.count()
     for(let i = 0; i < count; ++i){
        if(await products.nth(i).locator('b').textContent() === productName)
@@ -38,24 +52,4 @@ test('First test', async ({page}) => {
 
     await page.locator('label[routerlink="/dashboard/myorders"]').click()
     
-    // await page.pause()
-    // const order = page.locator('tbody tr')
-    // const orderCount = order.count()
-    
-
-    // for(let i = 0; i < orderCount; ++i){
-    //          const rowOrderId = await order.nth(i).locator('th').textContent()
-    //          if(orderId.includes*rowOrderId){
-    //              await order.nth(i).locator('button').first().click()
-    //              break
-    //          }
-             
-    
-    //  }
-    //  await page.pause()
-
 })
-
-
-
-

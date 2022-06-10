@@ -15,6 +15,8 @@ test.beforeEach(async ({ page }) => {
     // await mainPage.closeWelcomModal()
     await mainPage.inputSearchField(mainPage.labAddrees)
     await mainPage.clickOnSearchResult()
+    await mainPage.observeWelcomeModal()
+    await mainPage.closeWelcomModal()
     await labSearchPage.clickScheduleAppointment()
     await labSearchPage.observeScheduleAppmodal()
     await labSearchPage.submitAppointment()

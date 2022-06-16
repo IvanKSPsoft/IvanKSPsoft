@@ -1,20 +1,19 @@
 const { test, request, expect } = require('@playwright/test')
 const { faker } = require ('@faker-js/faker')
-// const { expect } = require('../playwright.config')
-let token = ''
+const { APIUtils } = require('./utils/APIUtils')
+let response = {}
+let email
+let password
 
 test.beforeAll(async ({}) => {
 const apiContext = await request.newContext()
-const email = `${faker.name.firstName()}+${faker.datatype.number(1000)}@email.com`
-const password = `${faker.name.lastName()}+${faker.date.future()}`
-const createUserResponse = await apiContext.post('https://rahulshettyacademy.com/api/ecom/auth/register', {
-     data: {firstName: faker.name.firstName(),lastName:faker.name.lastName(),userEmail: email ,userRole:"customer",
-     occupation:"Student",gender:"Female",userMobile:"1234567890",userPassword:password,
-     confirmPassword:password,required:true} 
-    })
-    expect(createUserResponse.ok()).toBeTruthy()
-    const createUserResponseJson = await createUserResponse.json()
-    console.log(createUserResponseJson)
+const apiUtils = new APIUtils(apiContext)
+response = await apiUtils.crateUser()
+email = response.email
+password = response.password
+console.log(email)
+await apiUtils.userLogin(email, password)
+
 
 const loginResponse = await apiContext.post('https://rahulshettyacademy.com/api/ecom/auth/login', {
      data: {userEmail: email, userPassword: password} 
@@ -46,5 +45,14 @@ test.only('First test', async ({page}) => {
     const products = page.locator('.card-body')
     const title = await page.locator('.card-body h5').allTextContents()
     await page.goto('https://rahulshettyacademy.com/client/')
-    await page.pause()
+    await page.locator('[routerlink="/dashboard/myorders"]').click()
+    await page.locator('tbody').waitFor()
+    const rows = page.locator('tbody tr')
+    for(let i = 0; i < await rows.count(); ++i) {
+        const rowOrderId = await rows.nth(i).locator('th').textContent()
+        if (orderId.includes(rowOrderId)) {
+            await rows.nth(i).locator('button').first().click()
+            break
+        }
+    }
 })

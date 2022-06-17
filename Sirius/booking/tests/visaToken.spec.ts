@@ -4,6 +4,7 @@ import { LabSearchPage } from '../pages/labSearch-page';
 import { PaymentPage } from '../pages/payment-page';
 import { ConfirmationPage } from '../pages/confirmation-page';
 import { FinishPage } from '../pages/finish-page';
+import { secreetKey } from '../pages/utils/secret';
 
 const currencieData = ['USD', 'EUR'];
 for (const name of currencieData) {
@@ -19,7 +20,7 @@ for (const name of currencieData) {
         const apiContext = await request.newContext()
         const loginResponse = await apiContext.post('https://siq.azure-api.net/test/mle-documents/api/mle-upload/v2/VISA/VISA_TRAVEL/trips', {
             headers: {
-                'Ocp-Apim-Subscription-Key': '3f459abb94ab408ab58094ba9fb47d86'
+                'Ocp-Apim-Subscription-Key': secreetKey
             },
             data: {
                 endUserTravelers: [{

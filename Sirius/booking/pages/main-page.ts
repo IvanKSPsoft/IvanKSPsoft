@@ -9,7 +9,7 @@ export class MainPage {
     closWelocoModalBtn: Locator;
     serachInput: Locator;
     labAddrees: string;
-  labAddrees2: string;
+    labAddrees2: string;
     
 
 

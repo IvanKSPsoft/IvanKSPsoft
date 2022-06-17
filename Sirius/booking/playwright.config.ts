@@ -12,9 +12,9 @@ import { devices } from '@playwright/test';
  */
 const config: PlaywrightTestConfig = {
   testDir: './tests',
-  timeout: 5*60 * 1000,
+  timeout: 50*60 * 1000,
   expect: {
-    timeout: 20000
+    timeout: 25000
   },
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */

@@ -42,6 +42,7 @@ export class PaymentPage {
   county: string;
   zipCode: string;
   discontPrice: string;
+  csvPhoneConcent: Locator;
 
   constructor(page: Page) {
     const editAppointmentBtnLocator = '.edit-appointment-button',
@@ -64,13 +65,14 @@ export class PaymentPage {
     groupNumberFieldLocator ='[name="What is your Group Number?"]',
     priceLocator = 'tr span',
     failPaymentModalLocator = '.landing-modal-title',
+    csvPhoneConcentLocator = '#CvsPhoneConsent',
     birthDayFieldlocator = '#Birthday';
     this.page = page;
     this.firstName = faker.name.firstName()
     this.lastName = faker.name.lastName()
     this.userName = `${faker.name.firstName()}+${faker.datatype.number(1000)}`
     this.email = `${this.userName}@email.ghostinspector.com`
-    this.phoneNumber = '+12029998877'
+    this.phoneNumber = '2029998877'
     this.streetAddress = faker.address.streetAddress()
     this.city = faker.address.city()
     this.county = faker.address.country()
@@ -105,6 +107,7 @@ export class PaymentPage {
     this.groupNumberField = page.locator(groupNumberFieldLocator)
     this.insurancePrice = page.locator(priceLocator).first()
     this.failPaymentText = page.locator(failPaymentModalLocator)
+    this.csvPhoneConcent = page.locator(csvPhoneConcentLocator)
   }
 
   async waitForLoaded() {
@@ -252,6 +255,7 @@ export class PaymentPage {
     await this.cardZipCodeInput()
     await this.stripePayBtn.isVisible()
     await this.stripePayBtn.click()
+    // await this.page.waitForTimeout(20000)
   }
 
   async failPaymentModal() {
@@ -274,6 +278,10 @@ export class PaymentPage {
     console.log(this.insurancePrice.allTextContents())
   }
 
+  async clickCsvPhoneConcent() {
+    await this.csvPhoneConcent.click()
+  }
+
   async qestionaryNewYork() {
     await this.firstQuestion('No')
     await this.symptomQuestion('No')
@@ -288,5 +296,81 @@ export class PaymentPage {
     await this.healthCareEmployedQuestion('No')
   }
 
+  async qestionaryMiami() {
+    await this.primaryPhoneQuestion()
+    await this.cvsSymptomsQuestion()
+    await this.cvsBloodPressureQuestion()
+    await this.cvsRisksQuestion()
+    await this.cvsFirstCovidQuestion()
+    await this.cvsHealthCareQuestion()
+    await this.cvsInterestedQuestion()
+    await this.cvsRelationshipQuestion()
+    await this.cvsRaceQuestion()
+    await this.cvsEthnicityQuestion()
+    await this.cvsPermissionToNotifyQuestion()
+    await this.cvsPhiDisclosureQuestion()
+    await this.cvsDigitalVMConsentQuestion()
+  }
+
+  async primaryPhoneQuestion() {
+    await this.page.locator('[name="IsMobileNumber"][value="1"]').click()
+  }
+
+  async cvsSymptomsQuestion() {
+    await this.page.locator('[name="CVS731"][value="17"]').click()
+  }
+
+  async cvsBloodPressureQuestion() {
+    await this.page.locator('[name="CVS732"][value="1"]').click()
+  }
+
+  async cvsRisksQuestion() {
+    await this.page.locator('[name="CVS761"][value="1"]').click()
+  }
+
+  async cvsFirstCovidQuestion() {
+    await this.page.locator('[name="CVS767"][value="1"]').click()
+  }
+
+  async cvsHealthCareQuestion() {
+    await this.page.locator('[name="CVS768"][value="1"]').click()
+  }
+
+  async cvsInterestedQuestion() {
+    await this.page.locator('[name="CVS753"][value="1"]').click()
+  }
+
+  async cvsRelationshipQuestion() {
+    await this.page.locator('[name="CVS762"][value="1"]').click()
+  }
+
+  async cvsRaceQuestion() {
+    await this.page.locator('[name="race"][value="1"]').click()
+  }
+
+  async cvsEthnicityQuestion() {
+    await this.page.locator('[name="ethnicity"][value="1"]').click()
+  }
+
+  async cvsPermissionToNotifyQuestion() {
+    await this.page.locator('[name="PermissionToNotify"][value="1"]').click()
+  }
+
+  async cvsPhiDisclosureQuestion() {
+    await this.page.locator('[name="phiDisclosure"][value="1"]').click()
+  }
+
+  async cvsDigitalVMConsentQuestion() {
+    await this.page.locator('[name="DigitalVMConsent"][value="1"]').click()
+  }
+
+  async reviewTermsAndConditionsMiami() {
+    await this.page.locator('#CvsConsent').click()
+    await this.page.locator('#CvsApptConsent').click()
+    await this.page.locator('#TrustAssureConsent').click()
+    await this.page.locator('#EmployeeConsent').click()
+    await this.page.locator('#PrivacyConsent').click()
+    await this.page.locator('#RefundPolicyConsent').click()
+  }
 
 }

@@ -12,7 +12,7 @@ response = await apiUtils.createOrderForNewUser({orders:[{country:"Ukraine",prod
 
 })
 
-test.only('First test', async ({page}) => {
+test('First test', async ({page}) => {
     page.addInitScript(value => {
         window.localStorage.setItem('token', value)
     }, response.token);

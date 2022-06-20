@@ -3,7 +3,7 @@ import { devices } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
   testDir: './tests',
-  timeout: 5*60 * 1000,
+  timeout: 60 * 1000,
   expect: {
     timeout: 15000
   },
@@ -12,7 +12,8 @@ const config: PlaywrightTestConfig = {
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  // retries: process.env.CI ? 2 : 0,
+  retries: 3,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -23,13 +24,11 @@ const config: PlaywrightTestConfig = {
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
     screenshot: 'on',
-    /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     baseURL: 'https://my.hellojasper.care/',
     trace: 'retain-on-failure',
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
@@ -45,12 +44,12 @@ const config: PlaywrightTestConfig = {
     //   },
     // },
 
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //   },
+    // },
 
     /* Test against mobile viewports. */
     // {
@@ -58,7 +57,7 @@ const config: PlaywrightTestConfig = {
     //   use: {
     //     ...devices['Pixel 5'],
     //   },
-    // },
+    // }
     // {
     //   name: 'Mobile Safari',
     //   use: {

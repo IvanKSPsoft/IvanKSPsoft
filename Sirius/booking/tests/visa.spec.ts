@@ -5,8 +5,8 @@ import { PaymentPage } from '../pages/payment-page';
 import { ConfirmationPage } from '../pages/confirmation-page';
 import { FinishPage } from '../pages/finish-page';
 
-const currencieData = ['ARS', 'XCD', 'AWG', 'BSD', 'BBD', 'BZD', 'BMD', 'BOB', 'BRL', 'KYD', 'CLP', 'COP', 'CRC', 'ANG', 'DOP', 'EUR',
-                        'GTQ', 'GYD', 'HTG', 'NHL', 'JMD', 'MHN', 'NIO', 'PAB', 'PYG', 'PEN', 'SRD', 'TTD', 'UYU', 'VEF'];
+const currencieData = [ 'MXN', 'ARS', 'XCD', 'AWG', 'BSD', 'BBD', 'BZD', 'BMD', 'BOB', 'BRL', 'KYD', 'CLP', 'COP', 'CRC', 'ANG', 'DOP', 'EUR',
+                        'GTQ', 'GYD', 'HTG', 'NHL', 'JMD', 'NIO', 'PAB', 'PYG', 'PEN', 'SRD', 'TTD', 'UYU', 'VEF'];
 for (const name of currencieData) {
   test.describe('Flow', () => {
     test.only(`e2e Book Appointment ${name}`, async ({ page }) => {
@@ -37,9 +37,11 @@ for (const name of currencieData) {
         await paymentPage.inputCounty(paymentPage.county)
         await paymentPage.inputZipCode(paymentPage.zipCode)    
         await paymentPage.qestionaryNewYork()
+        await page.waitForTimeout(1000)
         await paymentPage.clickPrivacyContent()
         await paymentPage.clickRefoundPolicyContent()
         await paymentPage.inputCardInfo()
+        await page.locator('table.price-table').screenshot({path: `test-results/valid/${name} currency screenshot1.png`})
         await confirmationPage.waitForloaded()
         await confirmationPage.clickContinueBtn()
         await finishPage.waitForLoaded()

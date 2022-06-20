@@ -5,6 +5,8 @@ export class RoleSelectionPage {
   selectPatientOption1Btn: Locator;
   selectPatientOption3Btn: Locator;
   selectCaregiverBtn: Locator;
+  static patintOption1BtnLocator: any;
+  static patientOption3BtnLocator: any;
 
   
 
@@ -32,5 +34,9 @@ export class RoleSelectionPage {
 
   async selectCaregiver() {
     await this.selectCaregiverBtn.click()
+  }
+
+  async selectRoleOption(option: string) {
+    await this.page.locator(option).click()
   }
 }

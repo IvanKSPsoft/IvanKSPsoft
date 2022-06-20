@@ -36,7 +36,7 @@ const plaeceOrderApi = await apiContext.post('https://rahulshettyacademy.com/api
     console.log(orderId)
 })
 
-test.only('First test', async ({page}) => {
+test('First test', async ({page}) => {
     page.addInitScript(value => {
         window.localStorage.setItem('token', value)
     }, token);

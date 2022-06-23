@@ -1,0 +1,21 @@
+{
+  "chromium createUserAPI2.spec.js First test" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "24b227440c166ecb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1655987852182,
+        "stop" : 1655987857972,
+        "duration" : 5790
+      }
+    } ]
+  }
+}

@@ -22,7 +22,7 @@ test('Screenshot & visual', async ({page}) => {
     await expect(page.locator('#displayed-text')).toBeHidden()
 })
 
-test.only('Visual', async({page}) => {
+test('Visual', async({page}) => {
     await page.goBack('https://www.my.hellojasper.com/login')
     expect(await page.screenshot()).toMatchSnapshot('landing.png')
 })

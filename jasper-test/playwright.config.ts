@@ -9,14 +9,9 @@ const config: PlaywrightTestConfig = {
   },
   fullyParallel: false,
   reportSlowTests: { max: 0, threshold: 60001 },
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  // retries: process.env.CI ? 2 : 0,
-  retries: 3,
-  /* Opt out of parallel tests on CI. */
+  retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   use: {
     headless: false,
@@ -25,14 +20,31 @@ const config: PlaywrightTestConfig = {
     video: 'on-first-retry',
     screenshot: 'on',
     actionTimeout: 0,
-    baseURL: 'https://my.hellojasper.care/',
+    baseURL: 'https://my.hellojasper.dev/',
     trace: 'retain-on-failure',
   },
 
   projects: [
     {
-      name: 'chromium',
+      name: 'UAT',
       use: {
+        baseURL: 'https://my.hellojasper.care/',
+        ...devices['Desktop Chrome'],
+      },
+    },
+
+    {
+      name: 'Staging',
+      use: {
+        baseURL: 'https://my.hellojasper.dev/',
+        ...devices['Desktop Chrome'],
+      },
+    },
+
+    {
+      name: 'Development',
+      use: {
+        baseURL: 'http://my.localhost:3000/',
         ...devices['Desktop Chrome'],
       },
     },

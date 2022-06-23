@@ -1,6 +1,6 @@
 const { test, request, expect } = require('@playwright/test')
 const { faker } = require ('@faker-js/faker')
-const { APIUtils } = require('./utils/APIUtils')
+const { APIUtils } = require('../utils/APIUtils')
 let response = {}
 let email
 let password
@@ -35,7 +35,6 @@ test('First test', async ({page}) => {
     await page.locator('#email').fill(email)
     await page.locator('#password').fill(password)
     await page.locator('[data-testing="button-submit"]').click()
-    await page.pause()
 
 
 })

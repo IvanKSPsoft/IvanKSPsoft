@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker"
 import { request, expect, APIRequestContext } from "@playwright/test"
 
 export class ApiUtils {
@@ -8,10 +7,10 @@ export class ApiUtils {
     }
     
     async createUser() {
-        const email = `${faker.name.firstName()}+fake${faker.datatype.number({min: 1000, max:99999})}@spsoft.com`
-        const password = `${faker.name.lastName()}+${faker.date.future()}`
-        const firstName = faker.name.firstName()
-        const lastName = faker.name.lastName()
+        const email = `ivantest+fake${Math.floor(Math.random() * 100000)}@spsoft.com`
+        const password = `123456`
+        const firstName = `firstName${Math.floor(Math.random() * 100000)}`
+        const lastName = `lastName${Math.floor(Math.random() * 100000)}`
         const apiContext = await request.newContext()
         const createUser = await apiContext.post('https://api.hellojasper.care/graphql', {
          data: {operationName:"signupUser",variables:{firstName: firstName,lastName:lastName,
@@ -22,7 +21,6 @@ export class ApiUtils {
         expect(createUser.ok()).toBeTruthy()
         const createUserJson = await createUser.json()
         const userEmail = createUserJson.data.signupUser.user.email
-        
         console.log(userEmail)
         return {email, password, firstName}
     }

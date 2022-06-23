@@ -38,7 +38,7 @@ test('First test', async ({page}) => {
 
     await page.locator('label[routerlink="/dashboard/myorders"]').click()
     
-    // await page.pause()
+    // )
     // const order = page.locator('tbody tr')
     // const orderCount = order.count()
     
@@ -52,7 +52,7 @@ test('First test', async ({page}) => {
              
     
     //  }
-    //  await page.pause()
+    //  )
 
 })
 

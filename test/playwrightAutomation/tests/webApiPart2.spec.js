@@ -15,7 +15,7 @@ test.beforeAll(async({browser}) => {
     await context.storageState({path: 'state.json'})
     webContext = await browser.newContext({storageState: 'state.json'})
 }) 
-test('First test', async () => {
+test('web api 2 @API', async () => {
     const productName = 'adidas original'
     const page = await webContext.newPage()
     const products = page.locator('.card-body')
@@ -47,7 +47,7 @@ test('First test', async () => {
 
     await page.locator('label[routerlink="/dashboard/myorders"]').click()
     
-    // await page.pause()
+    // )
     // const order = page.locator('tbody tr')
     // const orderCount = order.count()
     
@@ -61,7 +61,7 @@ test('First test', async () => {
              
     
     //  }
-    //  await page.pause()
+    //  )
 
 })
 

@@ -1,37 +1,34 @@
 import { test, expect, Page, request} from '@playwright/test';
-import { faker } from '@faker-js/faker';
 import { ApiUtils } from './utils/ApiUtils';
 import { App } from '../pages/App-page';
 let response
 
 
 // test.describe.configure({ mode: 'parallel' })
-test.beforeEach(async ({ page }) => {
+
+test.describe('Sign-up' , () => {
+  test.skip('Sign Up As A Patient API', async ({ page }) => {
+    const app = new App(page),
+          roleSelectionPage = app.roleSelectionPage,
+          commonActions = app.commonActions,
+          acountDetailesPage = app.accountDetailesPage,
+          addDiagnosesPage = app.addDiagnosisPage,
+          addTreatmentPage = app.addTreatmentPage,
+          addInterestsPage = app.addInterestsPage,
+          connectionsPage = app.connectionsPage,
+          homePage = app.homePage,
+          loginPage = app.loginPage
+
+
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
     response = await apiUtils.createUser()
     console.log(response)
 
     await page.goto('/login')
-    await page.locator('#email').fill(response.email)
-    await page.locator('#password').fill(response.password)
-    await page.locator('[data-testing="button-submit"]').click()
-});
-
-test.describe('Sign-up' , () => {
-  test('Sign Up As A Patient (option 1)', async ({ page }) => {
-    const app = new App(page),
-          loginPage = app.loginPage,
-          roleSelectionPage = app.roleSelectionPage,
-          updatePatientPage = app.updatePatientPage,
-          commonActions = app.commonActions,
-          welcomePage = app.welcomePage,
-          acountDetailesPage = app.accountDetailesPage,
-          addDiagnosesPage = app.addDiagnosisPage,
-          addTreatmentPage = app.addTreatmentPage,
-          addInterestsPage = app.addInterestsPage,
-          connectionsPage = app.connectionsPage,
-          homePage = app.homePage
+    await loginPage.inputEmailField(response.email)
+    await loginPage.inputPasswordField(response.password)
+    await loginPage.clickLoginbtn()
 
     await roleSelectionPage.selectPatientOption1()
     await page.waitForTimeout(1000)

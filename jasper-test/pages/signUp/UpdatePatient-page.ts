@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import { expect, Locator, Page } from '@playwright/test';
 
 export class UpdatePatientPage {
@@ -10,7 +9,6 @@ export class UpdatePatientPage {
   emailField: Locator;
   passwordField: Locator;
   password: string;
-
 
   constructor(page: Page) {
     const firstNameFiledLocator = '#first-name',
@@ -42,11 +40,11 @@ export class UpdatePatientPage {
     await this.firstNameField.fill(name)
   }
 
-  async inputLastNameField(option= faker.name.lastName()) {
+  async inputLastNameField(option = `lastName${Math.floor(Math.random() * 100000)}`) {
     await this.lastNameField.fill(option)
   }
 
-  async inputEmailField(option = `${faker.name.lastName()}+fake${faker.datatype.bigInt({ min: 100000n, max: 999999n })}@spsoft.com`) {
+  async inputEmailField(option = `ivantest+fake${Math.floor(Math.random() * 100000)}@spsoft.com`) {
     await this.emailField.fill(option)
   }
 

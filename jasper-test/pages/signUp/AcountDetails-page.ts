@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import { expect, Locator, Page } from '@playwright/test';
 
 export class AccountDetailsPage {
@@ -35,7 +34,7 @@ export class AccountDetailsPage {
   }
 
   async inputZipCodeField() {
-    await this.zipCodeField.fill(faker.address.zipCode())
+    await this.zipCodeField.fill('11111')
   }
 
   async selectAgeGroup(age: '18-39 years' | '40-64 years' | '65+ years') {

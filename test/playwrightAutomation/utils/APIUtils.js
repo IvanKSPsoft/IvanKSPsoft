@@ -19,6 +19,7 @@ class APIUtils {
         const createUserResponseJson = await createUserResponse.json()
         console.log(createUserResponseJson)
         console.log(email)
+        console.log(password)
         return {email, password}
         
     }

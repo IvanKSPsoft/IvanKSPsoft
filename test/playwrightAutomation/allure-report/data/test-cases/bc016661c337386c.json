@@ -1,0 +1,86 @@
+{
+  "uid" : "bc016661c337386c",
+  "name" : "First test",
+  "fullName" : "First test",
+  "historyId" : "chromium createUserAPI2.spec.js First test",
+  "time" : {
+    "start" : 1655987619370,
+    "stop" : 1655987625337,
+    "duration" : 5967
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "3ddc79268b38efc7",
+      "name" : "stdout",
+      "source" : "3ddc79268b38efc7.txt",
+      "type" : "text/plain",
+      "size" : 49
+    }, {
+      "uid" : "97cebe42dd01c395",
+      "name" : "stdout",
+      "source" : "97cebe42dd01c395.txt",
+      "type" : "text/plain",
+      "size" : 23
+    }, {
+      "uid" : "8a09a9728d8e7ad9",
+      "name" : "stdout",
+      "source" : "8a09a9728d8e7ad9.txt",
+      "type" : "text/plain",
+      "size" : 73
+    }, {
+      "uid" : "cdbe109ad3a80106",
+      "name" : "stdout",
+      "source" : "cdbe109ad3a80106.txt",
+      "type" : "text/plain",
+      "size" : 284
+    }, {
+      "uid" : "fb165d7492fa1bb0",
+      "name" : "stdout",
+      "source" : "fb165d7492fa1bb0.txt",
+      "type" : "text/plain",
+      "size" : 358
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "language",
+    "value" : "JavaScript"
+  }, {
+    "name" : "framework",
+    "value" : "Playwright"
+  }, {
+    "name" : "parentSuite",
+    "value" : "chromium"
+  }, {
+    "name" : "suite",
+    "value" : "createUserAPI2.spec.js"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "bc016661c337386c.json",
+  "parameterValues" : [ ]
+}

@@ -1,14 +1,13 @@
 import { test, expect, Page } from '@playwright/test';
-import { faker } from '@faker-js/faker';
 import { App } from '../pages/App-page';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/login')
-  await page.locator('[data-testing="button-submit"]').waitFor()
 });
-// test.describe.configure({ mode: 'parallel' })
+
+test.describe.configure({ mode: 'parallel' })
 test.describe('Sign-up' , () => {
-  test('Sign Up As A Patient (option 1)', async ({ page }) => {
+  test.only('Sign Up As A Patient (option 1)', async ({ page }) => {
     const app = new App(page),
           loginPage = app.loginPage,
           roleSelectionPage = app.roleSelectionPage,
@@ -21,7 +20,7 @@ test.describe('Sign-up' , () => {
           addInterestsPage = app.addInterestsPage,
           connectionsPage = app.connectionsPage,
           homePage = app.homePage,
-          name = faker.name.firstName()
+          name = `firstName${Math.floor(Math.random() * 100000)}`
     
     await loginPage.clickSignUpBtn()
     await roleSelectionPage.waitForLoaded()
@@ -58,7 +57,7 @@ test.describe('Sign-up' , () => {
     await homePage.observeWelcomTitle(name)
   })
 
-  test('Sign Up As A Caregiver (option 4)', async ({ page }) => {
+  test.only('Sign Up As A Caregiver (option 4)', async ({ page }) => {
     const app = new App(page),
           loginPage = app.loginPage,
           roleSelectionPage = app.roleSelectionPage,
@@ -70,8 +69,8 @@ test.describe('Sign-up' , () => {
           addTreatmentPage = app.addTreatmentPage,
           addInterestsPage = app.addInterestsPage,
           homePage = app.homePage,
-          name = faker.name.firstName(),
-          patientName = faker.name.firstName()
+          name = `firstName${Math.floor(Math.random() * 100000)}`,
+          patientName = `patientName${Math.floor(Math.random() * 100000)}`
     
     await loginPage.clickSignUpBtn()
     await roleSelectionPage.waitForLoaded()
@@ -107,7 +106,7 @@ test.describe('Sign-up' , () => {
     await homePage.observeWelcomTitle(name)
   })
 
-  test('Sign Up As A Patient (option 3)', async ({ page }) => {
+  test.only('Sign Up As A Patient (option 3)', async ({ page }) => {
      const app = new App(page),
           loginPage = app.loginPage,
           roleSelectionPage = app.roleSelectionPage,
@@ -120,7 +119,7 @@ test.describe('Sign-up' , () => {
           addInterestsPage = app.addInterestsPage,
           connectionsPage = app.connectionsPage,
           homePage = app.homePage,
-          name = faker.name.firstName()
+          name = `firstName${Math.floor(Math.random() * 100000)}`
     
     await loginPage.clickSignUpBtn()
     await roleSelectionPage.waitForLoaded()

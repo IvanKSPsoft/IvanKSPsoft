@@ -1,6 +1,6 @@
 const { test, request, expect } = require('@playwright/test')
 const { faker } = require ('@faker-js/faker')
-const { APIUtils } = require('./utils/APIUtils')
+const { APIUtils } = require('../utils/APIUtils')
 let response = {}
 let email
 let password
@@ -36,7 +36,7 @@ const plaeceOrderApi = await apiContext.post('https://rahulshettyacademy.com/api
     console.log(orderId)
 })
 
-test('First test', async ({page}) => {
+test('First test @API', async ({page}) => {
     page.addInitScript(value => {
         window.localStorage.setItem('token', value)
     }, token);

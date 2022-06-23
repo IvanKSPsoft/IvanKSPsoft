@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "help": "playwright --help",
+    "UAT": "playwright test --config playwright.config.ts --project=UAT",
+    "Staging": "playwright test --config playwright.config.ts --project=Staging",
+    "Development": "playwright test --config playwright.config.ts --project=Development"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@faker-js/faker": "^7.1.0",
     "@playwright/test": "^1.22.2"
-  },
-  "dependencies": {
-    "faker": "^6.6.6"
   }
+
 }

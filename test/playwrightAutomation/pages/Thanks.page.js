@@ -19,5 +19,4 @@ class ThanksPage {
     }
 
 }
-
 module.exports = {ThanksPage}

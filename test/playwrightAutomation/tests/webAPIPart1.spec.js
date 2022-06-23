@@ -1,5 +1,5 @@
 const { test, request, expect} = require('@playwright/test')
-const { APIUtils } = require('./utils/APIUtils')
+const { APIUtils } = require('../utils/APIUtils')
 const loginPayload = {userEmail: "ivan.kovalov@spsoft.com", userPassword: "P@ssw0rd1"}
 const orderPayload = {orders:[{country:"Ukraine",productOrderedId:"6262e990e26b7e1a10e89bfa"}]}
 
@@ -11,7 +11,7 @@ test.beforeAll(async () => {
     response = await apiUtils.createOrder(orderPayload)
     })
     
-    test('First test', async ({page}) => {
+    test('web api @API', async ({page}) => {
         page.addInitScript(value => {
             window.localStorage.setItem('token', value)
         }, response.token);

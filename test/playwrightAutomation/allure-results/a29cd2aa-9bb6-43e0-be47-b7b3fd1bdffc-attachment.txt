@@ -1,0 +1,1 @@
+{ message: [32m'Registered Successfully'[39m }

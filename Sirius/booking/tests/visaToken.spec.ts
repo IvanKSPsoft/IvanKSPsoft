@@ -48,7 +48,7 @@ for (const name of currencieData) {
            expect(loginResponse.ok()).toBeTruthy()
            const lognResponseJson = await loginResponse.json()
            const responceObj = lognResponseJson[Object.keys(lognResponseJson)[0]]
-           const token = responceObj[Object.keys(responceObj)[0]]
+           const token = responceObj.consumerToken
            console.log(token)    
         
         const url = `https://visa-test.trustassure.app/?consumerToken=${token}&currency=${currency}`

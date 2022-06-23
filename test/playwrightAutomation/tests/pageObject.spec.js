@@ -1,33 +1,30 @@
 const { test, response } = require('@playwright/test')
 const { App } = require('../pages/App.page')
+const dataSet = JSON.parse(JSON.stringify(require("../utils/pageObjectTestData.json")))
 
-test('First test', async ({page}) => {
+for(const data of dataSet){
+
+test(`First test ${data.productName}` , async ({page}) => {
     const app = new App(page),
     loginPage = app.loginPage,
     dashboardPage = app.dashboardPage,
     cartPage = app.cartPage,
     paymentPage = app.paymentPage,
     thanksPage = app.thanksPage
-    productName = 'adidas original',
-    email = 'ivan.kovalov@spsoft.com',
-    password = 'P@ssw0rd1',
-    ccv = '333',
-    nameOnCard = 'Ivan k',
-    country = 'Ukraine';
     let orderId = ''
 
 
     await loginPage.openLoginPage()
-    await loginPage.inputLoginCredentials(email, password)
+    await loginPage.inputLoginCredentials(data.email, data.password)
     await page.waitForLoadState('networkidle')
     await dashboardPage.waitForLoaded()
-    await dashboardPage.addProduct(productName)
+    await dashboardPage.addProduct(data.productName)
     await dashboardPage.clickCartButton()
     await cartPage.waitForLoaded()
-    await cartPage.observeProduct(productName)
+    await cartPage.observeProduct(data.productName)
     await cartPage.clickCheckOut()
     await paymentPage.waitForLoaded()
-    await paymentPage.proccedPayment(ccv, nameOnCard, country)
+    await paymentPage.proccedPayment(data.ccv, data.nameOnCard, data.country)
     await thanksPage.waitForLoaded()
     orderId = await thanksPage.grabOrder()
     
@@ -40,7 +37,7 @@ test('First test', async ({page}) => {
 
     await page.locator('label[routerlink="/dashboard/myorders"]').click()
     
-    // await page.pause()
+    // )
     // const order = page.locator('tbody tr')
     // const orderCount = order.count()
     
@@ -56,7 +53,7 @@ test('First test', async ({page}) => {
     //     }
 
 })
-
+}
 
 
 

@@ -9,7 +9,7 @@ const currencieData = [ 'MXN', 'ARS', 'XCD', 'AWG', 'BSD', 'BBD', 'BZD', 'BMD', 
                         'GTQ', 'GYD', 'HTG', 'NHL', 'JMD', 'NIO', 'PAB', 'PYG', 'PEN', 'SRD', 'TTD', 'UYU', 'VEF'];
 for (const name of currencieData) {
   test.describe('Flow', () => {
-    test.only(`e2e Book Appointment ${name}`, async ({ page }) => {
+    test(`e2e Book Appointment ${name}`, async ({ page }) => {
         const mainPage = new MainPage(page),
             labSearchPage = new LabSearchPage(page),
             paymentPage = new PaymentPage(page),

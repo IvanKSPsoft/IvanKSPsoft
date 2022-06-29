@@ -55,19 +55,3 @@ test('ui controls', async ({ page }) => {
     console.log(await cardTiele.allTextContents())
 })
 
-test('child window', async ({ browser }) => {
-    
-    const context = await browser.newContext()
-    const page = await context.newPage()
-    await page.goto('https://rahulshettyacademy.com/loginpagePractise/')
-    const userName = page.locator('#username')
-    const documentLink = page.locator('[href="https://rahulshettyacademy.com/#/documents-request"]')
-    const [newPage] = await Promise.all([
-        context.waitForEvent('page'),
-        documentLink.click(),
-   ])
-   const text = await newPage.locator('div.text').first().textContent()
-   console.log(text)
-   await newPage.locator('[href="https://courses.rahulshettyacademy.com/sign_in3"]').click()
-   await userName.type('rahulshettyacademy')
-})

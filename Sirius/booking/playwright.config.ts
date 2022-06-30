@@ -7,13 +7,13 @@ import { devices } from '@playwright/test';
  */
 const config: PlaywrightTestConfig = {
   testDir: './tests',
-  timeout: 2 * 120 * 1000,
+  timeout: 3 * 120 * 1000,
   expect: {
     timeout: 25000
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: 2,
+  retries: 3,
   workers: process.env.CI ? 1 : 6,
   reporter: 'html',
   use: {

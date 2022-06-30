@@ -754,5 +754,154 @@ test.describe('AI Vaccine', () => {
     expect(fields[0]).toContain("Dob                          (0.985) -       No:")
   })
 
+  test('OlarteYakle.jpeg', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/OlarteYakle.jpeg')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.236)
+    expect(fields[18]).toContain('Name                         (0.986) -       No:')
+    expect(fields[0]).toContain("Dob                          (0.616) -  Unclear:")
+  })
 
+  test('Orthin.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/Orthin.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.342)
+    expect(fields[18]).toContain('Name                         (0.986) -       No:')
+    expect(fields[0]).toContain("Dob                              (1) -       No:")
+  })
+
+  test('ParadisehealthcareServise.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/ParadisehealthcareServise.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.236)
+    expect(fields[18]).toContain('Name                         (0.975) -       No:')
+    expect(fields[0]).toContain("Dob                          (0.638) -  Unclear:")
+  })
+
+  test('QuestDiagnostics.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/QuestDiagnostics.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.23)
+    expect(fields[18]).toContain('Name                         (0.967) -       No:')
+    expect(fields[0]).toContain("Dob                         (0.99194294) -       No:")
+  })
+
+  test('Randox.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/Randox.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.342)
+    expect(fields[18]).toContain('Name                         (0.985) -       No:')
+    expect(fields[0]).toContain("Dob                              (1) -       No:")
+  })
+
+  test('Prenetics.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/Prenetics.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.346)
+    expect(fields[18]).toContain('Name                         (0.987) -       No:')
+    expect(fields[0]).toContain("Dob                              (1) -       No:")
+  })
+
+  test('Referencia.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/Referencia.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.346)
+    expect(fields[18]).toContain('Name                         (0.985) -       No:')
+    expect(fields[0]).toContain("Dob                         (0.9976518) -       No:")
+  })
+
+
+  test('SaludDigna.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/SaludDigna.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.229)
+    expect(fields[18]).toContain('Name                         (0.985) -       No:')
+    expect(fields[0]).toContain("Dob                          (0.271) -  Unclear:")
+  })
+
+  test('Sanlor.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/Sanlor.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.341)
+    expect(fields[18]).toContain('Name                         (0.981) -       No:')
+    expect(fields[0]).toContain("Dob                              (1) -       No:")
+  })
+
+  test('SantLukesHospitals.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const sendTest = await apiContext.post(url, {
+      multipart: {
+        file: fs.ReadStream ('./testFiles/SantLukesHospitals.pdf')
+      },
+    })
+    const responseBody = await sendTest.json()
+    expect(sendTest.ok()).toBeTruthy()
+    const fields = responseBody.fields
+    expect(responseBody.confidence).toEqual(0.346)
+    expect(fields[18]).toContain('Name                         (0.986) -       No:')
+    expect(fields[0]).toContain("Dob                         (0.9871111) -       No:")
+  })
 })

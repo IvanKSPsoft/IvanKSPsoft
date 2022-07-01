@@ -6,13 +6,20 @@
   "scripts": {
     "debug": "npx playwright test --debug",
     "test": "npx playwright test",
-    "ai": "npx playwright test /ai.spec.ts"
+    "ai": "npx playwright test /ai.spec.ts",
+    "visaToken": "npx playwright test /visaToken.spec.ts",
+    "visa": "npx playwright test /visa.spec.ts",
+    "booking": "npx playwright test /booking.spec.ts",
+    "allure:generate": "npx allure generate ./allure-results --clean",
+    "allure:open": "npx allure open ./allure-report"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^7.1.0",
-    "@playwright/test": "^1.22.2"
+    "@playwright/test": "^1.23.1",
+    "allure-commandline": "^2.17.2",
+    "allure-playwright": "^2.0.0-beta.18"
   }
 }

@@ -1,13 +1,9 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
 
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 const config: PlaywrightTestConfig = {
   testDir: './tests',
-  timeout: 3 * 120 * 1000,
+  timeout: 120 * 1000,
   expect: {
     timeout: 25000
   },
@@ -15,14 +11,16 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   retries: 3,
   workers: process.env.CI ? 1 : 6,
-  reporter: 'html',
+  reporter: [
+    ['line'],
+    ['allure-playwright']
+  ],
   use: {
     headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
     screenshot: 'only-on-failure',
-    /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     baseURL: 'https://clx-scus-test-trustassure-booking.azurewebsites.net/',
     trace: 'retain-on-failure',

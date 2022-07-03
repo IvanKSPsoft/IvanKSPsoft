@@ -15,13 +15,11 @@ export class MainPage {
 
   constructor(page: Page) {
     const searchDropdownitemLocator = '.dxbs-clickable',
-    closWelocoModalBtnLocator = '[data-qa-selector="dx-popup-close-button"]',
-    welcomeModalHeader = '[data-qa-selector="dx-popup-close-button"]',
+    
     searchInputLocator ='input[placeholder="Search by address or zip code"]';
     this.page = page;
     this.searchDropdownitem = page.locator(searchDropdownitemLocator),
-    this.mainPageModal = page.locator(welcomeModalHeader)
-    this.closWelocoModalBtn = page.locator(closWelocoModalBtnLocator)
+    
     this.serachInput = page.locator(searchInputLocator)
     this.labAddrees = 'Walmart Neighborhood Market, 1001, East Main Street, Yukon, Canadian County, Oklahoma, 73099, United States'
     this.labAddrees2 = 'Marriott Vacation Club, New York City, 33, West 37th Street, Midtown South, Manhattan Community Board 5, New York County, City of New York, New York, 10018, United States'
@@ -33,14 +31,7 @@ export class MainPage {
     await this.page.goto('');
   }
 
-  async observeWelcomeModal() {
-      await this.searchDropdownitem.isVisible()
-  }
-
-  async closeWelcomModal() {
-    await this.closWelocoModalBtn.click()
-    await this.mainPageModal.isHidden()
-  }
+  
 
   async inputSearchField(labAddrees: string) {
     await this.serachInput.click()

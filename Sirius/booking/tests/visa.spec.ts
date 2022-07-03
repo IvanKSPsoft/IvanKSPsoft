@@ -19,8 +19,6 @@ for (const name of currencieData) {
         await page.goto(`https://visa-test.trustassure.app/?currency=${currency}`)
         await mainPage.inputSearchField(mainPage.labAddrees2)
         await mainPage.clickOnSearchResult()
-        // await mainPage.observeWelcomeModal()
-        // await mainPage.closeWelcomModal()
         await labSearchPage.clickScheduleAppointment()
         await labSearchPage.observeScheduleAppmodal()
         await labSearchPage.submitAppointment()
@@ -46,7 +44,6 @@ for (const name of currencieData) {
         await confirmationPage.clickContinueBtn()
         await finishPage.waitForLoaded()
         await finishPage.clickContinueBtn()
-        await labSearchPage.waitForLoaded()
         console.log(`${currency} passed`)
     });
 

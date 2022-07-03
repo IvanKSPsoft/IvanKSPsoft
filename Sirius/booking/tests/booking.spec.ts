@@ -11,12 +11,8 @@ test.beforeEach(async ({ page }) => {
         paymentPage = new PaymentPage(page);
 
     await mainPage.open();
-    // await mainPage.observeWelcomeModal()
-    // await mainPage.closeWelcomModal()
     await mainPage.inputSearchField(mainPage.labAddrees)
     await mainPage.clickOnSearchResult()
-    // await mainPage.observeWelcomeModal()
-    // await mainPage.closeWelcomModal()
     await labSearchPage.clickScheduleAppointment()
     await labSearchPage.observeScheduleAppmodal()
     await labSearchPage.submitAppointment()
@@ -51,7 +47,6 @@ test.describe('Flow', () => {
       await confirmationPage.clickContinueBtn()
       await finishPage.waitForLoaded()
       await finishPage.clickContinueBtn()
-      await labSearchPage.waitForLoaded()
   });
 
   test('e2e Book Appointment with discount', async ({ page }) => {
@@ -81,7 +76,6 @@ test.describe('Flow', () => {
       await confirmationPage.clickContinueBtn()
       await finishPage.waitForLoaded()
       await finishPage.clickContinueBtn()
-      await labSearchPage.waitForLoaded()
   });
 
   test('e2e pay with invalid Card', async ({ page }) => {

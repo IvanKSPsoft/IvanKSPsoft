@@ -43,6 +43,7 @@ export class PaymentPage {
   zipCode: string;
   discontPrice: string;
   csvPhoneConcent: Locator;
+  countryDropdown: Locator;
 
   constructor(page: Page) {
     const editAppointmentBtnLocator = '.edit-appointment-button',
@@ -66,6 +67,7 @@ export class PaymentPage {
     priceLocator = 'tr span',
     failPaymentModalLocator = '.landing-modal-title',
     csvPhoneConcentLocator = '#CvsPhoneConsent',
+    countryDropdownLocator = '#Country',
     birthDayFieldlocator = '#Birthday';
     this.page = page;
     this.firstName = faker.name.firstName()
@@ -108,6 +110,7 @@ export class PaymentPage {
     this.insurancePrice = page.locator(priceLocator).first()
     this.failPaymentText = page.locator(failPaymentModalLocator)
     this.csvPhoneConcent = page.locator(csvPhoneConcentLocator)
+    this.countryDropdown = page.locator(countryDropdownLocator)
   }
 
   async waitForLoaded() {
@@ -133,6 +136,7 @@ export class PaymentPage {
   }
 
   async inputMobile(mobile: string) {
+    await this.mobileField.click()
     await this.mobileField.fill(mobile)
   }
   
@@ -154,6 +158,10 @@ export class PaymentPage {
 
   async selectStateDropdown() {
     await this.stateDropdown.selectOption('AA')
+  }
+
+  async selectCountryDropdown() {
+    await this.countryDropdown.selectOption('US')
   }
 
   async selectGenderDropdown() {

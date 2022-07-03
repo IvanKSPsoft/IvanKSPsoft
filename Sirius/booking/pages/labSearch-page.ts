@@ -8,7 +8,9 @@ export class LabSearchPage {
     sheduleAppBtnDisabled: Locator;
     sheduleAppBtnEnabled: Locator;
     timeSlot: Locator;
-  map: Locator;
+    map: Locator;
+    closWelocomeModalBtn: Locator;
+    welcomeModal: Locator;
  
 
 
@@ -19,7 +21,10 @@ export class LabSearchPage {
     sheduleAppBtnDisabledlocator = '.booking-popup-continue-button[disabled]',
     sheduleAppBtnEnabledlocator = '.booking-popup-continue-button',
     timeSlotLocator = '.picker-time-slot',
+    closWelocomeModalBtnLocator = '[data-qa-selector="dx-popup-close-button"]',
+    welcomeModalHeader = '[data-qa-selector="dx-popup-close-button"]',
     maoLocator = '#lab-map',
+    
     scheduleAppModalLocator = '[role="document"]';
     this.page = page;
     this.firstScheduleAppBtn = page.locator(firstScheduleAppBtnLocator)
@@ -29,6 +34,8 @@ export class LabSearchPage {
     this.sheduleAppBtnEnabled = page.locator(sheduleAppBtnEnabledlocator)
     this.timeSlot = page.locator(timeSlotLocator)
     this.map = page.locator(maoLocator)
+    this.welcomeModal = page.locator(welcomeModalHeader)
+    this.closWelocomeModalBtn = page.locator(closWelocomeModalBtnLocator)
 
   }
 
@@ -39,6 +46,11 @@ export class LabSearchPage {
   async waitForLoaded() {
     await this.page.waitForNavigation()
     await this.map.waitFor()
+  }
+
+  async closeWelcomeModal() {
+    await this.closWelocomeModalBtn.click()
+    await this.welcomeModal.isHidden()
   }
 
   async clickScheduleAppointment() {

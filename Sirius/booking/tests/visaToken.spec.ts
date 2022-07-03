@@ -35,12 +35,12 @@ for (const name of currencieData) {
                         providerTripName: "VISA",
                         segments: [{
                         ordinalNumber: 0,
-                        arrivalDateTimeLocal: "2022-06-18T10:00:00+00:00",
-                        departureDateTimeLocal: "2022-06-18T20:00:00+00:00",
-                        destination: "LHR",
-                        destinationCountryCode: "GB",
-                        origin: "MIA",
-                        originCountryCode: "US"
+                        arrivalDateTimeLocal: "2022-07-18T10:00:00+00:00",
+                        departureDateTimeLocal: "2022-07-18T20:00:00+00:00",
+                        destination: "MIA",
+                        destinationCountryCode: "US",
+                        origin: "IEV",
+                        originCountryCode: "UA"
                         }]
                     }]
                 }
@@ -55,27 +55,26 @@ for (const name of currencieData) {
         console.log(url)
         await page.goto(url)
         await page.waitForTimeout(1000)
-        await mainPage.closeWelcomModal()
+        await labSearchPage.closeWelcomeModal()
         await labSearchPage.clickScheduleAppointment()
         await labSearchPage.submitAppointment()
         await paymentPage.waitForLoaded()
         await paymentPage.inputCity(paymentPage.city)
-        await paymentPage.inputStreet(paymentPage.streetAddress)
-        await paymentPage.inputMobile(paymentPage.phoneNumber)
         await paymentPage.selectGenderDropdown()
+        await paymentPage.selectCountryDropdown()
+        await paymentPage.inputStreet(paymentPage.streetAddress)
         await paymentPage.selectStateDropdown()
         await paymentPage.inputCounty(paymentPage.county)
         await paymentPage.inputZipCode(paymentPage.zipCode)  
-        await paymentPage.clickCsvPhoneConcent()
-        await paymentPage.qestionaryMiami()
-        await paymentPage.reviewTermsAndConditionsMiami()      
+        await paymentPage.inputMobile(paymentPage.phoneNumber)
+        await paymentPage.qestionaryNewYork()
+        await paymentPage.clickPrivacyContent()
+        await paymentPage.clickRefoundPolicyContent()  
         await paymentPage.inputCardInfo()
         await page.waitForNavigation()
-        // await confirmationPage.waitForloaded()
         await confirmationPage.clickContinueBtn()
         await finishPage.waitForLoaded()
         await finishPage.clickContinueBtn()
-        await labSearchPage.waitForLoaded()
         console.log(`${currency} + ${token} passed`)
     });
 

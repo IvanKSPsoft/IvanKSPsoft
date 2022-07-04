@@ -6,7 +6,7 @@
   "scripts": {
     "debug": "npx playwright test --debug",
     "test": "npx playwright test",
-    "ai": "npx playwright test /ai.spec.ts",
+    "ai": "npx playwright test /ai.spec.ts && npx playwright test /aiVaccinesPt2.spec.ts",
     "visaToken": "npx playwright test /visaToken.spec.ts",
     "visa": "npx playwright test /visa.spec.ts",
     "booking": "npx playwright test /booking.spec.ts",

@@ -6,7 +6,7 @@ import { ConfirmationPage } from '../pages/confirmation-page';
 import { FinishPage } from '../pages/finish-page';
 import { secreetKey, secret } from '../pages/utils/secret';
 
-const currencieData = ['USD', 'EUR'];
+const currencieData = ['EUR', 'USD'];
 for (const name of currencieData) {
   test.describe('Flow', () => {
     test.only(`e2e Book Appointment ${name}`, async ({ page }) => {
@@ -28,7 +28,7 @@ for (const name of currencieData) {
                 firstName: "some",
                 lastName: "test",
                 dateOfBirth: "2000-01-01T00:00:00.000Z",
-                email: "ivan.fake+10@spsoft.com"
+                email: "ivan.kovalov+10@spsoft.com"
                 }],
                     endUserTrips: [{
                         tripType: "FLIGHT",
@@ -67,6 +67,7 @@ for (const name of currencieData) {
         await paymentPage.inputCounty(paymentPage.county)
         await paymentPage.inputZipCode(paymentPage.zipCode)  
         await paymentPage.inputMobile(paymentPage.phoneNumber)
+        await paymentPage.selectInsurance('No')
         await paymentPage.qestionaryNewYork()
         await paymentPage.clickPrivacyContent()
         await paymentPage.clickRefoundPolicyContent()  

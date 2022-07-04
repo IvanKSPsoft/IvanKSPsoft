@@ -62,16 +62,11 @@ export class LabSearchPage {
     await expect(this.appointmentModalLabel).toBeVisible()
   }
 
-  async observeContinuebtnDisabled() {
-    await expect(this.sheduleAppBtnDisabled).toBeDisabled()
-  }
-
   async observeContinuebtnEnabled() {
     await expect(this.sheduleAppBtnEnabled).toBeVisible()
   }
 
   async submitAppointment() {
-    this.observeContinuebtnDisabled()
     //TODO not worked
     //await this.timeSlot.click()
     await this.page.click('.picker-time-slot')

@@ -9,14 +9,14 @@ const config: PlaywrightTestConfig = {
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: 3,
+  retries: 2,
   workers: process.env.CI ? 1 : 6,
   reporter: [
     ['line'],
     ['allure-playwright']
   ],
   use: {
-    headless: false,
+    headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',

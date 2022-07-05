@@ -32,7 +32,7 @@ for (const name of currencieData) {
         await paymentPage.inputMobile(paymentPage.phoneNumber)
         await paymentPage.selectGenderDropdown()
         await paymentPage.selectStateDropdown()
-        await paymentPage.inputCounty(paymentPage.county)
+        // await paymentPage.inputCounty(paymentPage.county)
         await paymentPage.inputZipCode(paymentPage.zipCode)    
         await paymentPage.qestionaryNewYork()
         await page.waitForTimeout(1000)

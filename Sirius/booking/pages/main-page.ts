@@ -10,6 +10,7 @@ export class MainPage {
     serachInput: Locator;
     labAddrees: string;
     labAddrees2: string;
+  labAddrees3: string;
     
 
 
@@ -23,7 +24,7 @@ export class MainPage {
     this.serachInput = page.locator(searchInputLocator)
     this.labAddrees = 'Walmart Neighborhood Market, 1001, East Main Street, Yukon, Canadian County, Oklahoma, 73099, United States'
     this.labAddrees2 = 'Marriott Vacation Club, New York City, 33, West 37th Street, Midtown South, Manhattan Community Board 5, New York County, City of New York, New York, 10018, United States'
-    
+    this.labAddrees3 = 'Оболонський район, Київ, Україна'
   }
 
   

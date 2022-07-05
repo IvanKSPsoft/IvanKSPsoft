@@ -64,7 +64,7 @@ for (const name of currencieData) {
         await paymentPage.selectCountryDropdown()
         await paymentPage.inputStreet(paymentPage.streetAddress)
         await paymentPage.selectStateDropdown()
-        await paymentPage.inputCounty(paymentPage.county)
+        // await paymentPage.inputCounty(paymentPage.county)
         await paymentPage.inputZipCode(paymentPage.zipCode)  
         await paymentPage.inputMobile(paymentPage.phoneNumber)
         await paymentPage.selectInsurance('No')

@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
         paymentPage = new PaymentPage(page);
 
     await mainPage.open();
-    await mainPage.inputSearchField(mainPage.labAddrees)
+    await mainPage.inputSearchField(mainPage.labAddrees3)
     await mainPage.clickOnSearchResult()
     await labSearchPage.clickScheduleAppointment()
     await labSearchPage.observeScheduleAppmodal()
@@ -27,7 +27,7 @@ test.beforeEach(async ({ page }) => {
     await paymentPage.inputMobile(paymentPage.phoneNumber)
     await paymentPage.selectGenderDropdown()
     await paymentPage.selectStateDropdown()
-    await paymentPage.inputCounty(paymentPage.county)
+    // await paymentPage.inputCounty(paymentPage.county)
     await paymentPage.inputZipCode(paymentPage.zipCode)
   });
   

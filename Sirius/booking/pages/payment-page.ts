@@ -55,7 +55,7 @@ export class PaymentPage {
     stereetFieldLocator = '#Street',
     cityFieldLocator = '#City',
     countyFiledLocator = '#County',
-    stateDropdownlocator = '#State',
+    stateDropdownlocator = '#state-select',
     zipCodelocator = '#PostalCode',
     insuranceYESLocator = '[name="Do you have insurance?"][value=Yes"]',
     insuranceNoLocator = '[name="Do you have insurance?"][value=No"]',
@@ -79,7 +79,7 @@ export class PaymentPage {
     this.city = faker.address.city()
     this.county = faker.address.country()
     this.zipCode = faker.address.zipCode()
-    this.discontPrice = '$49.95'
+    this.discontPrice = '$49.00'
     this.editAppointmentBtn = page.locator(editAppointmentBtnLocator)
     this.almostDoneLabel = page.locator('h1', { hasText: 'Almost Done!'})
     this.firstNameField = page.locator(firstNameFieldLocator)

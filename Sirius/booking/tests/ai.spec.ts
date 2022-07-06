@@ -5,7 +5,7 @@ const url = 'https://clx-scus-dev-document-processor.azurewebsites.net/api/v1/fo
 test.describe.configure({ mode: 'parallel' })
 test.describe('AI Vaccine', () => {
   test('Ahorro.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Ahorro.pdf')
@@ -20,7 +20,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Ahorro3.png', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Ahorro3.png')
@@ -35,7 +35,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Amadita.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Amadita.pdf')
@@ -50,7 +50,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Amatista.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Amatista.pdf')
@@ -65,7 +65,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Amatista.png', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Amatista.png')
@@ -80,7 +80,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('AMC1.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/AMC1.pdf')
@@ -95,7 +95,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('AMC2.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/AMC2.pdf')
@@ -110,7 +110,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Amerimed_A.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Amerimed_A.pdf')
@@ -125,7 +125,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Amerimed_B.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Amerimed_B.pdf')
@@ -140,7 +140,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Azumed.jpeg', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Azumed.jpeg')
@@ -155,7 +155,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Azumed2.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Azumed2.pdf')
@@ -170,7 +170,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('BelizeDiagnostic.jpeg', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/BelizeDiagnostic.jpeg')
@@ -185,7 +185,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Biomedica.jpeg', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Biomedica.jpeg')
@@ -200,7 +200,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Biomedica2.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Biomedica2.pdf')
@@ -215,7 +215,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('BlueMedical.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/BlueMedical.pdf')
@@ -230,7 +230,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('CentroMedicoPuntoCana.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/CentroMedicoPuntoCana.pdf')
@@ -245,7 +245,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Chopo.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Chopo.pdf')
@@ -260,7 +260,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Costamed1.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Costamed1.pdf')
@@ -275,7 +275,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('cvs1.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/cvs_2cf2ce19e9284e2393da6153dc831841.pdf')
@@ -290,7 +290,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('cvs2.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/cvs_4edaef2b04034cc7a0b152493e4f0059.pdf')
@@ -305,7 +305,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('cvs3.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/cvs_health_0cbb52931de5492b8db46104e9efa41c.jpeg')
@@ -320,7 +320,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('cvs-positive.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/cvs-positive.pdf')
@@ -335,7 +335,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('DamHealth.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/DamHealth.pdf')
@@ -350,7 +350,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('DiAra.jpeg', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/DiAra.jpeg')
@@ -365,7 +365,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('DiAra2.jpeg', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/DiAra2.jpeg')
@@ -380,7 +380,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('DNAfit.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/DNAfit.pdf')
@@ -395,7 +395,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('DocHQ.png', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/DocHQ.png')
@@ -410,7 +410,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('DoctorHospitalHealthSystem.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/DoctorHospitalHealthSystem.pdf')
@@ -425,7 +425,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('DunaLife.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/DunaLife.pdf')
@@ -440,7 +440,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Emedlabs.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Emedlabs.pdf')
@@ -455,7 +455,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('ExpressTest.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/ExpressTest.pdf')
@@ -470,7 +470,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('GrupoArh.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/GrupoArh.pdf')
@@ -485,7 +485,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('GSI.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/GSI.pdf')
@@ -500,7 +500,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('HospitalMetropolitano.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/HospitalMetropolitano.pdf')
@@ -515,7 +515,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('hospiten_A.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/hospiten_A.pdf')
@@ -530,7 +530,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('hospiten_b.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/hospiten_b.pdf')
@@ -545,7 +545,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('hospiten_b.png', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/hospiten_b.png')
@@ -560,7 +560,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('HuellaGenica1.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/HuellaGenica1.pdf')
@@ -575,7 +575,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('HuellaGenica2.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/HuellaGenica2.pdf')
@@ -590,7 +590,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('LabEchandi1.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/LabEchandi1.pdf')
@@ -605,7 +605,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('LabEchandi2.png', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/LabEchandi2.png')
@@ -620,7 +620,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Lapi.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Lapi.pdf')
@@ -635,7 +635,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('LMP1.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/LMP1.pdf')
@@ -650,7 +650,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('LMP2.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/LMP2.pdf')
@@ -665,7 +665,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Mavelsa.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Mavelsa.pdf')
@@ -680,7 +680,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('mds.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/mds_2b199c0f46704453961375fba11a0817.pdf')
@@ -695,7 +695,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('MDT.jpeg', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/MDT.jpeg')
@@ -710,7 +710,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('MedexLab.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/MedexLab.pdf')
@@ -725,7 +725,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('MedicalCertificate.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/MedicalCertificate.pdf')
@@ -740,7 +740,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Olab.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Olab.pdf')
@@ -755,7 +755,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('OlarteYakle.jpeg', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/OlarteYakle.jpeg')
@@ -770,7 +770,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Orthin.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Orthin.pdf')
@@ -785,7 +785,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('ParadisehealthcareServise.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/ParadisehealthcareServise.pdf')
@@ -800,7 +800,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('QuestDiagnostics.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/QuestDiagnostics.pdf')
@@ -815,7 +815,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Randox.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Randox.pdf')
@@ -830,7 +830,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Prenetics.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Prenetics.pdf')
@@ -845,7 +845,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Referencia.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Referencia.pdf')
@@ -861,7 +861,7 @@ test.describe('AI Vaccine', () => {
 
 
   test('SaludDigna.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/SaludDigna.pdf')
@@ -876,7 +876,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('Sanlor.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/Sanlor.pdf')
@@ -891,7 +891,7 @@ test.describe('AI Vaccine', () => {
   })
 
   test('SantLukesHospitals.pdf', async ({ page }) => {
-    const apiContext = await request.newContext()
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const sendTest = await apiContext.post(url, {
       multipart: {
         file: fs.ReadStream ('./testFiles/SantLukesHospitals.pdf')

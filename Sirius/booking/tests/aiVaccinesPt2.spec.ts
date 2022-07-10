@@ -553,4 +553,5 @@ test.describe('AI Vaccine Pt2', () => {
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
     expect(response.fields[18]).toContain('Name                          (0.47) -       No:')
   })
+
 })

@@ -23,7 +23,7 @@ const config: PlaywrightTestConfig = {
     screenshot: 'only-on-failure',
     actionTimeout: 0,
     baseURL: 'https://clx-scus-test-trustassure-booking.azurewebsites.net/',
-    trace: 'retain-on-failure',
+    trace: 'off',
   },
   projects: [
     {

@@ -20,7 +20,7 @@ for (const name of currencieData) {
         const apiContext = await request.newContext({ignoreHTTPSErrors: true})
         const loginResponse = await apiContext.post('https://siq.azure-api.net/test/mle-documents/api/mle-upload/v2/VISA/VISA_TRAVEL/trips', {
             headers: {
-                'Ocp-Apim-Subscription-Key': secret.secreetKey1
+                'Ocp-Apim-Subscription-Key': secret.secreetKeyVisa
             },
             data: {
                 endUserTravelers: [{

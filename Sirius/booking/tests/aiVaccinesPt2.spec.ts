@@ -184,14 +184,24 @@ test.describe('AI Vaccine Pt2', () => {
     expect(response.fields[18]).toContain('Name                         (0.989) -       No:')
   })
 
-  test('bermuda2doses.jpeg', async ({ page }) => {
+  test('NHS-2doses-1doseleft.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/bermuda2doses.jpeg')
-    expect(response.responseBody.confidence).toEqual(0.725)
-    expect(response.fields[0]).toContain('Dob                           (0.99) -       No:')
+    const response = await apiUtils.uploadFile(url, './testFiles/NHS-2doses-1doseleft.pdf')
+    expect(response.responseBody.confidence).toEqual(0.992)
+    expect(response.fields[0]).toContain('Dob                          (0.993) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
-    expect(response.fields[18]).toContain('Name                         (0.755) -       No:')
+    expect(response.fields[18]).toContain('Name                         (0.993) -       No:')
+  })
+
+  test('Bermuda-vac-2doses.pdf', async ({ page }) => {
+    const apiContext = await request.newContext()
+    const apiUtils = new ApiUtils(apiContext)
+    const response = await apiUtils.uploadFile(url, './testFiles/Bermuda-vac-2doses.pdf')
+    expect(response.responseBody.confidence).toEqual(0.869)
+    expect(response.fields[0]).toContain('Dob                          (0.993) -       No:')
+    expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
+    expect(response.fields[18]).toContain('Name                         (0.958) -       No:')
   })
 
   test('testColumbia3dose.jpeg', async ({ page }) => {

@@ -1,43 +1,50 @@
 import { test, Page } from '@playwright/test';
+import { TestUploadPage } from '../pages/testUpload-nih-page';
+import { UserInfoPage } from '../pages/userInfo-nih-page';
 
 const url = 'https://nih.trustassure.app/userinformation/'
-
+test.beforeEach(async({page})=> {
+    const userInfoPage = new UserInfoPage(page)
+    await page.goto(url)
+    await userInfoPage.inputFirstName()
+    await userInfoPage.inputLastName()
+    await userInfoPage.inputAddress()
+    await userInfoPage.selecCountry()
+    await userInfoPage.inputEmail()
+    await userInfoPage.inputDOB()
+    await userInfoPage.inputCity()
+    await userInfoPage.inputPhone()
+    await userInfoPage.inputZipCode()
+    await userInfoPage.selectGender()
+    await userInfoPage.selectState()
+    await userInfoPage.inputZipCode()
+    await userInfoPage.inputCounty()
+    await userInfoPage.clickNameField()
+    
+})
 test.describe('nih', async ()=> {
     test('Nih e2e', async({page}) => {
-        await page.goto(url)
-        await page.fill('#full-first-name', `FirstName+${Math.floor(Math.random() * 100000)}`)
-        await page.fill('#full-last-name', `LastName+${Math.floor(Math.random() * 100000)}`)
-        await page.type('[type="date"]', `01012000`)
-        await page.fill('#input-phone', `1234567890`)
-        await page.fill('#input-email', `ivantest+${Math.floor(Math.random() * 100000)}@spsoft.com`)
-        await page.selectOption('#input-gender', 'M')
-        await page.fill('#input-streetAddress', `Address +${Math.floor(Math.random() * 100000)}`)
-        await page.fill('#input-county', `county +${Math.floor(Math.random() * 100000)}`)
-        await page.fill('#input-city', `city +${Math.floor(Math.random() * 100000)}`)
-        await page.fill('#input-postalCode', `11111`)
-        await page.selectOption('#input-State', 'AA')
-        await page.selectOption('#input-country', 'us')
-        await page.click('#full-first-name')
-        await page.click('.indicator-label')
+        const userInfoPage = new UserInfoPage(page),
+        testUploadPage = new TestUploadPage(page)
+
+        await userInfoPage.clickContinueBtn()
         await page.waitForNavigation()
-        await page.click('[type="checkbox"]')
-        await page.isEnabled('[title="Select file to upload"]')
+        await testUploadPage.clickUploadCheckbox()
+        await testUploadPage.answerOnQuestionary()
+        await page.waitForTimeout(1000)
+        await testUploadPage.uploadFile()
+        await testUploadPage.clickContinueBtn()
+        await testUploadPage.successfullRedirect()
+    })
 
-        await page.click('//div[contains(text(), "Yes")][1]/input')
-        await page.click('//div[contains(text(), "Yes")][2]/input')
-        await page.click('//div[contains(text(), "No")][3]/input')
-        await page.click('//div[contains(text(), "No")][4]/input')
-        await page.click('//div[contains(text(), "Unknown")][5]/input')
-        await page.click('//div[contains(text(), "Unknown")][6]/input')
-        await page.click('//div[contains(text(), "Unknown")][7]/input')
-        page.on('filechooser', async (filechooser) => {
-            await filechooser.setFiles('./testFiles/Ahorro.pdf')
-        })
-        
-        await page.click('.drag-drop-zone')
+    test.skip('Nih proceed payment', async({page}) => {
+        const userInfoPage = new UserInfoPage(page),
+        testUploadPage = new TestUploadPage(page)
 
-        await page.click('.btn-continue')
-        await page.waitForSelector('.text-content')
+        await userInfoPage.selectOfficialDocument()
+        await userInfoPage.inputCreditCard()
+        await userInfoPage.clickContinueBtn()
+        await page.waitForNavigation()
         
     })
 

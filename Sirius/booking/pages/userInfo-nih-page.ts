@@ -17,6 +17,7 @@ export class UserInfoPage {
     continueBtn: Locator;
     officialDocumentField: Locator;
   refundPolicy: Locator;
+  stripeFrame: any;
 
 
   constructor(page: Page) {
@@ -34,7 +35,8 @@ export class UserInfoPage {
     countryFieldLocator = '#input-country',
     continueBtnLocator = '.indicator-label',
     officialDocumentFieldLocator = '//*[contains(text(),"Do you require an official test result document?")]/../select',
-    refundPolicyLocator = '#refundPolicy'
+    refundPolicyLocator = '#refundPolicy',
+    stripeFrameLocator = '[title="Secure card payment input frame"]'
     this.page = page;
     this.firstName = page.locator(firstNameLocator)
     this.lastName = page.locator(lastNameLocator)
@@ -51,6 +53,7 @@ export class UserInfoPage {
     this.continueBtn = page.locator(continueBtnLocator)
     this.officialDocumentField = page.locator(officialDocumentFieldLocator)
     this.refundPolicy = page.locator(refundPolicyLocator)
+    this.stripeFrame = page.frameLocator(stripeFrameLocator)
   }
   
   async inputFirstName(name = `FirstName+${Math.floor(Math.random() * 100000)}`) {
@@ -115,7 +118,19 @@ export class UserInfoPage {
   }
 
   async inputCreditCard() {
-    await this.page.frameLocator('[name="__privateStripeFrame7016"]').locator('[aria-label="Credit or debit card number"]').fill('4242424242424242')
+    await this.stripeFrame.locator('[aria-label="Credit or debit card number"]').fill('4242424242424242')
+  }
+
+  async inputCreditExpiration() {
+    await this.stripeFrame.locator('[aria-label="Credit or debit card expiration date"]').fill('1123')
+  }
+
+  async inputCreditCCV() {
+    await this.stripeFrame.locator('[aria-label="Credit or debit card CVC/CVV"]').fill('1123')
+  }
+
+  async inputCreditZip() {
+    await this.stripeFrame.locator('[aria-label="ZIP"]').fill('11233')
   }
 
 

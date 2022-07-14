@@ -1,10 +1,13 @@
 import { test, Page } from '@playwright/test';
+import { NihApp } from '../pages/nihApp';
 import { TestUploadPage } from '../pages/testUpload-nih-page';
 import { UserInfoPage } from '../pages/userInfo-nih-page';
 
 const url = 'https://nih.trustassure.app/userinformation/'
 test.beforeEach(async({page})=> {
-    const userInfoPage = new UserInfoPage(page)
+    const nih = new NihApp(page),
+          userInfoPage = nih.userInfoPage
+
     await page.goto(url)
     await userInfoPage.inputFirstName()
     await userInfoPage.inputLastName()
@@ -24,27 +27,36 @@ test.beforeEach(async({page})=> {
 })
 test.describe('nih', async ()=> {
     test('Nih e2e', async({page}) => {
-        const userInfoPage = new UserInfoPage(page),
-        testUploadPage = new TestUploadPage(page)
+        const nih = new NihApp(page)
+              
 
-        await userInfoPage.clickContinueBtn()
+        await nih.userInfoPage.clickContinueBtn()
         await page.waitForNavigation()
-        await testUploadPage.clickUploadCheckbox()
-        await testUploadPage.answerOnQuestionary()
+        await nih.testUploadPage.clickUploadCheckbox()
+        await nih.testUploadPage.answerOnQuestionary()
         await page.waitForTimeout(1000)
-        await testUploadPage.uploadFile()
-        await testUploadPage.clickContinueBtn()
-        await testUploadPage.successfullRedirect()
+        await nih.testUploadPage.uploadFile()
+        await nih.testUploadPage.clickContinueBtn()
+        await nih.testUploadPage.successfullRedirect()
+
     })
 
-    test.skip('Nih proceed payment', async({page}) => {
-        const userInfoPage = new UserInfoPage(page),
-        testUploadPage = new TestUploadPage(page)
+    test.only('Nih proceed payment', async({page}) => {
+        const nih = new NihApp(page)
 
-        await userInfoPage.selectOfficialDocument()
-        await userInfoPage.inputCreditCard()
-        await userInfoPage.clickContinueBtn()
+        await nih.userInfoPage.selectOfficialDocument()
+        await nih.userInfoPage.inputCreditCard()
+        await nih.userInfoPage.inputCreditExpiration()
+        await nih.userInfoPage.inputCreditCCV()
+        await nih.userInfoPage.inputCreditZip()
+        await nih.userInfoPage.clickContinueBtn()
         await page.waitForNavigation()
+        await nih.testUploadPage.clickUploadCheckbox()
+        await nih.testUploadPage.answerOnQuestionary()
+        await page.waitForTimeout(1000)
+        await nih.testUploadPage.uploadFile()
+        await nih.testUploadPage.clickContinueBtn()
+        await nih.testUploadPage.successfullRedirect()
         
     })
 

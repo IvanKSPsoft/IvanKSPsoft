@@ -1,20 +1,12 @@
 import { test, request, expect, Page } from '@playwright/test';
-import { MainPage } from '../pages/main-page';
-import { LabSearchPage } from '../pages/labSearch-page';
-import { PaymentPage } from '../pages/payment-page';
-import { ConfirmationPage } from '../pages/confirmation-page';
-import { FinishPage } from '../pages/finish-page';
 import { secreetKey, secret } from '../pages/utils/secret';
+import { BookingApp } from '../pages/bookingApp';
 
 const currencieData = ['EUR', 'USD'];
 for (const name of currencieData) {
   test.describe('Flow', () => {
     test.only(`e2e Book Appointment ${name}`, async ({ page }) => {
-        const mainPage = new MainPage(page),
-            labSearchPage = new LabSearchPage(page),
-            paymentPage = new PaymentPage(page),
-            confirmationPage = new ConfirmationPage(page),
-            finishPage = new FinishPage(page),
+        const booking = new BookingApp(page),
             currency = name;
 
         const apiContext = await request.newContext({ignoreHTTPSErrors: true})
@@ -55,27 +47,27 @@ for (const name of currencieData) {
         console.log(url)
         await page.goto(url)
         await page.waitForTimeout(1000)
-        await labSearchPage.closeWelcomeModal()
-        await labSearchPage.clickScheduleAppointment()
-        await labSearchPage.submitAppointment()
-        await paymentPage.waitForLoaded()
-        await paymentPage.inputCity(paymentPage.city)
-        await paymentPage.selectGenderDropdown()
-        await paymentPage.selectCountryDropdown()
-        await paymentPage.inputStreet(paymentPage.streetAddress)
-        await paymentPage.selectStateDropdown()
+        await booking.labSearchPage.closeWelcomeModal()
+        await booking.labSearchPage.clickScheduleAppointmentKiev()
+        await booking.labSearchPage.submitAppointment()
+        await booking.paymentPage.waitForLoaded()
+        await booking.paymentPage.inputCity(booking.paymentPage.city)
+        await booking.paymentPage.selectGenderDropdown()
+        await booking.paymentPage.selectCountryDropdown()
+        await booking.paymentPage.inputStreet(booking.paymentPage.streetAddress)
+        await booking.paymentPage.selectStateDropdown()
         // await paymentPage.inputCounty(paymentPage.county)
-        await paymentPage.inputZipCode(paymentPage.zipCode)  
-        await paymentPage.inputMobile(paymentPage.phoneNumber)
-        await paymentPage.selectInsurance('No')
-        await paymentPage.qestionaryNewYork()
-        await paymentPage.clickPrivacyContent()
-        await paymentPage.clickRefoundPolicyContent()  
-        await paymentPage.inputCardInfo()
+        await booking.paymentPage.inputZipCode(booking.paymentPage.zipCode)  
+        await booking.paymentPage.inputMobile(booking.paymentPage.phoneNumber)
+        await booking.paymentPage.selectInsurance('No')
+        await booking.paymentPage.qestionaryNewYork()
+        await booking.paymentPage.clickPrivacyContent()
+        await booking.paymentPage.clickRefoundPolicyContent()  
+        await booking.paymentPage.inputCardInfo()
         await page.waitForNavigation()
-        await confirmationPage.clickContinueBtn()
-        await finishPage.waitForLoaded()
-        await finishPage.clickContinueBtn()
+        await booking.confirmationPage.clickContinueBtn()
+        await booking.finishPage.waitForLoaded()
+        await booking.finishPage.clickContinueBtn()
         console.log(`${currency} + ${token} passed`)
     });
 

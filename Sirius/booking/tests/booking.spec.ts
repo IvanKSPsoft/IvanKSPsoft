@@ -1,97 +1,85 @@
 import { test, Page } from '@playwright/test';
-import { MainPage } from '../pages/main-page';
-import { LabSearchPage } from '../pages/labSearch-page';
-import { PaymentPage } from '../pages/payment-page';
-import { ConfirmationPage } from '../pages/confirmation-page';
-import { FinishPage } from '../pages/finish-page';
+import { BookingApp } from '../pages/bookingApp';
 
 test.beforeEach(async ({ page }) => {
-  const mainPage = new MainPage(page),
-        labSearchPage = new LabSearchPage(page),
-        paymentPage = new PaymentPage(page);
+  const booking = new BookingApp(page)
 
-    await mainPage.open();
-    await mainPage.inputSearchField(mainPage.labAddrees3)
-    await mainPage.clickOnSearchResult()
-    await labSearchPage.clickScheduleAppointment()
-    await labSearchPage.observeScheduleAppmodal()
-    await labSearchPage.submitAppointment()
-    await paymentPage.waitForLoaded()
-    await paymentPage.inputFirstName(paymentPage.firstName)
-    await paymentPage.inputLastName(paymentPage.lastName)
-    await paymentPage.inputEmail(paymentPage.email)
-    console.log(paymentPage.userName)
-    await paymentPage.inputBirthday()
-    await paymentPage.inputCity(paymentPage.city)
-    await paymentPage.inputStreet(paymentPage.streetAddress)
-    await paymentPage.inputMobile(paymentPage.phoneNumber)
-    await paymentPage.selectGenderDropdown()
-    await paymentPage.selectStateDropdown()
+    await booking.mainPage.open();
+    await booking.mainPage.inputSearchField(booking.mainPage.labAddrees3)
+    await booking.mainPage.clickOnSearchResult()
+    await booking.labSearchPage.clickScheduleAppointment()
+    await booking.labSearchPage.observeScheduleAppmodal()
+    await booking.labSearchPage.submitAppointment()
+    await booking.paymentPage.waitForLoaded()
+    await booking.paymentPage.inputFirstName(booking.paymentPage.firstName)
+    await booking.paymentPage.inputLastName(booking.paymentPage.lastName)
+    await booking.paymentPage.inputEmail(booking.paymentPage.email)
+    console.log(booking.paymentPage.userName)
+    await booking.paymentPage.inputBirthday()
+    await booking.paymentPage.inputCity(booking.paymentPage.city)
+    await booking.paymentPage.inputStreet(booking.paymentPage.streetAddress)
+    await booking.paymentPage.inputMobile(booking.paymentPage.phoneNumber)
+    await booking.paymentPage.selectGenderDropdown()
+    await booking.paymentPage.selectStateDropdown()
     // await paymentPage.inputCounty(paymentPage.county)
-    await paymentPage.inputZipCode(paymentPage.zipCode)
+    await booking.paymentPage.inputZipCode(booking.paymentPage.zipCode)
   });
   
 
 test.describe('Flow', () => {
   test('e2e Book Appointment with full price', async ({ page }) => {
-    const labSearchPage = new LabSearchPage(page),
-          paymentPage = new PaymentPage(page),
-          confirmationPage = new ConfirmationPage(page),
-          finishPage = new FinishPage(page);
+    const booking = new BookingApp(page)
 
-      await paymentPage.defaultQuestionaryAnswers('No')
-      await paymentPage.clickPrivacyContent()
-      await paymentPage.clickRefoundPolicyContent()
-      await paymentPage.inputCardInfo()
-      await confirmationPage.waitForloaded()
-      await confirmationPage.clickContinueBtn()
-      await finishPage.waitForLoaded()
-      await finishPage.clickContinueBtn()
+      await booking.paymentPage.defaultQuestionaryAnswers('No')
+      await booking.paymentPage.clickPrivacyContent()
+      await booking.paymentPage.clickRefoundPolicyContent()
+      await booking.paymentPage.inputCardInfo()
+      await booking.confirmationPage.waitForloaded()
+      await booking.confirmationPage.clickContinueBtn()
+      await booking.finishPage.waitForLoaded()
+      await booking.finishPage.clickContinueBtn()
   });
 
   test('e2e Book Appointment with discount', async ({ page }) => {
-    const labSearchPage = new LabSearchPage(page),
-          paymentPage = new PaymentPage(page),
-          confirmationPage = new ConfirmationPage(page),
-          finishPage = new FinishPage(page);
+    const booking = new BookingApp(page)
           
-      await paymentPage.selectInsurance('Yes')
-      await paymentPage.inputInsuranceInfo()
-      await paymentPage.firstQuestion('No')
-      await paymentPage.symptomQuestion('No')
-      await paymentPage.orderdingQuestion('No')
-      await paymentPage.firstCovidQuestion('No')
-      await paymentPage.previoslyDiagnosQuestion('No')
-      await paymentPage.yourSymtopmsDiagnosQuestion('No')
-      await paymentPage.medicalConditionsQuestion('No')
-      await paymentPage.residenceQuestion('No')
-      await paymentPage.raceQuestion()
-      await paymentPage.latinoQuestion()
-      await paymentPage.healthCareEmployedQuestion('No')
-      await paymentPage.clickPrivacyContent()
-      await paymentPage.clickRefoundPolicyContent()
-      await paymentPage.compareInsurancePrice(paymentPage.discontPrice)
-      await paymentPage.inputCardInfo()
-      await confirmationPage.waitForloaded()
-      await confirmationPage.clickContinueBtn()
-      await finishPage.waitForLoaded()
-      await finishPage.clickContinueBtn()
+      await booking.paymentPage.selectInsurance('Yes')
+      await booking.paymentPage.inputInsuranceInfo()
+      await booking.paymentPage.firstQuestion('No')
+      await booking.paymentPage.symptomQuestion('No')
+      await booking.paymentPage.orderdingQuestion('No')
+      await booking.paymentPage.firstCovidQuestion('No')
+      await booking.paymentPage.previoslyDiagnosQuestion('No')
+      await booking.paymentPage.yourSymtopmsDiagnosQuestion('No')
+      await booking.paymentPage.medicalConditionsQuestion('No')
+      await booking.paymentPage.residenceQuestion('No')
+      await booking.paymentPage.raceQuestion()
+      await booking.paymentPage.latinoQuestion()
+      await booking.paymentPage.healthCareEmployedQuestion('No')
+      await booking.paymentPage.clickPrivacyContent()
+      await booking.paymentPage.clickRefoundPolicyContent()
+      await booking.paymentPage.compareInsurancePrice(booking.paymentPage.discontPrice)
+      await booking.paymentPage.inputCardInfo()
+      await booking.confirmationPage.waitForloaded()
+      await booking.confirmationPage.clickContinueBtn()
+      await booking.finishPage.waitForLoaded()
+      await booking.finishPage.clickContinueBtn()
   });
 
   test('e2e pay with invalid Card', async ({ page }) => {
-    const paymentPage = new PaymentPage(page);
+    const booking = new BookingApp(page)
 
-          await paymentPage.defaultQuestionaryAnswers('No')
-          await paymentPage.clickPrivacyContent()
-          await paymentPage.clickRefoundPolicyContent()
-          await paymentPage.stripeFrame.click()
-          await paymentPage.cardNumberInput('4000000000000002')
-          await paymentPage.cardExpirationInput()
-          await paymentPage.cardCCVInput()
-          await paymentPage.cardZipCodeInput()
-          await paymentPage.stripePayBtn.isVisible()
-          await paymentPage.stripePayBtn.click()
-          await paymentPage.failPaymentModal()
+      await booking.paymentPage.defaultQuestionaryAnswers('No')
+      await booking.paymentPage.clickPrivacyContent()
+      await booking.paymentPage.clickRefoundPolicyContent()
+      await booking.paymentPage.stripeFrame.click()
+      await booking.paymentPage.cardNumberInput('4000000000000002')
+      await booking.paymentPage.cardExpirationInput()
+      await booking.paymentPage.cardCCVInput()
+      await booking.paymentPage.cardZipCodeInput()
+      await booking.paymentPage.stripePayBtn.isVisible()
+      await booking.paymentPage.stripePayBtn.click()
+      await booking.paymentPage.failPaymentModal()
   })
 
 });

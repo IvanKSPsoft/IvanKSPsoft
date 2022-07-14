@@ -11,6 +11,7 @@ export class LabSearchPage {
     map: Locator;
     closWelocomeModalBtn: Locator;
     welcomeModal: Locator;
+  kievScheduleAppBtn: Locator;
  
 
 
@@ -24,7 +25,7 @@ export class LabSearchPage {
     closWelocomeModalBtnLocator = '[data-qa-selector="dx-popup-close-button"]',
     welcomeModalHeader = '[data-qa-selector="dx-popup-close-button"]',
     maoLocator = '#lab-map',
-    
+    kievLabLocator = '//*[contains(text(), "Kiev")]/../../../button',
     scheduleAppModalLocator = '[role="document"]';
     this.page = page;
     this.firstScheduleAppBtn = page.locator(firstScheduleAppBtnLocator)
@@ -36,6 +37,7 @@ export class LabSearchPage {
     this.map = page.locator(maoLocator)
     this.welcomeModal = page.locator(welcomeModalHeader)
     this.closWelocomeModalBtn = page.locator(closWelocomeModalBtnLocator)
+    this.kievScheduleAppBtn = page.locator(kievLabLocator)
 
   }
 
@@ -55,6 +57,10 @@ export class LabSearchPage {
 
   async clickScheduleAppointment() {
     await this.firstScheduleAppBtn.click()
+  }
+
+  async clickScheduleAppointmentKiev() {
+    await this.kievScheduleAppBtn.click()
   }
   
   async observeScheduleAppmodal() {

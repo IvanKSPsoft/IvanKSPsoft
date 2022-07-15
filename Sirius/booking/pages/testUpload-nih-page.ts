@@ -41,9 +41,9 @@ export class TestUploadPage {
     await this.page.click('//div[contains(text(), "Unknown")][7]/input')
   }
   
-  async uploadFile() {
+  async uploadFile(file: string) {
       this.page.on('filechooser', async (filechooser) => {
-          await filechooser.setFiles('./testFiles/Ahorro.pdf')
+          await filechooser.setFiles(file)
       })
       await this.page.waitForTimeout(2000)
       await this.dragAndDropZone.click({force: true})

@@ -18,6 +18,12 @@ export class UserInfoPage {
     officialDocumentField: Locator;
   refundPolicy: Locator;
   stripeFrame: any;
+  travelField: Locator;
+  nationalDropDown: Locator;
+  passportField: Locator;
+  insuranceField: Locator;
+  healthPlanDropDown: Locator;
+  memberIdField: Locator;
 
 
   constructor(page: Page) {
@@ -35,8 +41,14 @@ export class UserInfoPage {
     countryFieldLocator = '#input-country',
     continueBtnLocator = '.indicator-label',
     officialDocumentFieldLocator = '//*[contains(text(),"Do you require an official test result document?")]/../select',
+    traelFieldLocator = '//*[contains(text(),"Is this for Travel?")]/../select',
+    insuranceFieldLocator = '//*[contains(text(),"Do you have US based health insurance? ")]/../select',
+    nationalDropDownLocator = '#input-national',
     refundPolicyLocator = '#refundPolicy',
-    stripeFrameLocator = '[title="Secure card payment input frame"]'
+    stripeFrameLocator = '[title="Secure card payment input frame"]',
+    passportFieldLocator = '#input-passport',
+    healthPlanDropDownLocator = '#input-HealthPlan',
+    memberIdFieldLocator = '#full-first-MemberId'
     this.page = page;
     this.firstName = page.locator(firstNameLocator)
     this.lastName = page.locator(lastNameLocator)
@@ -54,6 +66,12 @@ export class UserInfoPage {
     this.officialDocumentField = page.locator(officialDocumentFieldLocator)
     this.refundPolicy = page.locator(refundPolicyLocator)
     this.stripeFrame = page.frameLocator(stripeFrameLocator)
+    this.travelField = page.locator(traelFieldLocator)
+    this.nationalDropDown = page.locator(nationalDropDownLocator)
+    this.passportField = page.locator(passportFieldLocator)
+    this.insuranceField = page.locator(insuranceFieldLocator)
+    this.healthPlanDropDown = page.locator(healthPlanDropDownLocator)
+    this.memberIdField = page.locator(memberIdFieldLocator)
   }
   
   async inputFirstName(name = `FirstName+${Math.floor(Math.random() * 100000)}`) {
@@ -133,5 +151,28 @@ export class UserInfoPage {
     await this.stripeFrame.locator('[aria-label="ZIP"]').fill('11233')
   }
 
+  async selectTravelField(option = 'True') {
+    await this.travelField.selectOption(option)
+  }
+
+  async selectNationality(option = 'us') {
+    await this.nationalDropDown.selectOption(option)
+  }
+
+  async inputPassport() {
+    await this.passportField.fill('1234567890')
+  }
+
+  async selectInsurancelField(option = 'True') {
+    await this.insuranceField.selectOption(option)
+  }
+
+  async selectHealthPlan(option = '35514') {
+    await this.healthPlanDropDown.selectOption(option)
+  }
+
+  async inputMemberId() {
+    await this.memberIdField.fill('1234567890')
+  }
 
 }

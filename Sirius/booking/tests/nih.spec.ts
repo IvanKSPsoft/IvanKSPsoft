@@ -5,28 +5,46 @@ import { UserInfoPage } from '../pages/userInfo-nih-page';
 
 const url = 'https://nih.trustassure.app/userinformation/'
 test.beforeEach(async({page})=> {
-    const nih = new NihApp(page),
-          userInfoPage = nih.userInfoPage
+    const nih = new NihApp(page)
+
 
     await page.goto(url)
-    await userInfoPage.inputFirstName()
-    await userInfoPage.inputLastName()
-    await userInfoPage.inputAddress()
-    await userInfoPage.selecCountry()
-    await userInfoPage.inputEmail()
-    await userInfoPage.inputDOB()
-    await userInfoPage.inputCity()
-    await userInfoPage.inputPhone()
-    await userInfoPage.inputZipCode()
-    await userInfoPage.selectGender()
-    await userInfoPage.selectState()
-    await userInfoPage.inputZipCode()
-    await userInfoPage.inputCounty()
-    await userInfoPage.clickNameField()
+    await nih.userInfoPage.inputFirstName()
+    await nih.userInfoPage.inputLastName()
+    await nih.userInfoPage.inputAddress()
+    await nih.userInfoPage.selecCountry()
+    await nih.userInfoPage.inputEmail()
+    await nih.userInfoPage.inputDOB()
+    await nih.userInfoPage.inputCity()
+    await nih.userInfoPage.inputPhone()
+    await nih.userInfoPage.inputZipCode()
+    await nih.userInfoPage.selectGender()
+    await nih.userInfoPage.selectState()
+    await nih.userInfoPage.inputZipCode()
+    await nih.userInfoPage.inputCounty()
+    await nih.userInfoPage.clickNameField()
     
 })
 test.describe('nih', async ()=> {
-    test('Nih e2e', async({page}) => {
+    test('Nih e2e with PDF upload ', async({page}) => {
+        const nih = new NihApp(page)
+              
+        await nih.userInfoPage.selectTravelField()
+        await nih.userInfoPage.selectNationality()
+        await nih.userInfoPage.inputPassport()
+        await nih.userInfoPage.clickNameField()
+        await nih.userInfoPage.clickContinueBtn()
+        await page.waitForNavigation()
+        await nih.testUploadPage.clickUploadCheckbox()
+        await nih.testUploadPage.answerOnQuestionary()
+        await page.waitForTimeout(1000)
+        await nih.testUploadPage.uploadFile('./testFiles/Ahorro.pdf')
+        await nih.testUploadPage.clickContinueBtn()
+        await nih.testUploadPage.successfullRedirect()
+
+    })
+
+    test('Nih e2e with JPEG upload ', async({page}) => {
         const nih = new NihApp(page)
               
 
@@ -35,13 +53,13 @@ test.describe('nih', async ()=> {
         await nih.testUploadPage.clickUploadCheckbox()
         await nih.testUploadPage.answerOnQuestionary()
         await page.waitForTimeout(1000)
-        await nih.testUploadPage.uploadFile()
+        await nih.testUploadPage.uploadFile('./testFiles/BelizeDiagnostic.jpeg')
         await nih.testUploadPage.clickContinueBtn()
         await nih.testUploadPage.successfullRedirect()
 
     })
 
-    test.only('Nih proceed payment', async({page}) => {
+    test('Nih proceed payment with PNG upload', async({page}) => {
         const nih = new NihApp(page)
 
         await nih.userInfoPage.selectOfficialDocument()
@@ -54,11 +72,10 @@ test.describe('nih', async ()=> {
         await nih.testUploadPage.clickUploadCheckbox()
         await nih.testUploadPage.answerOnQuestionary()
         await page.waitForTimeout(1000)
-        await nih.testUploadPage.uploadFile()
+        await nih.testUploadPage.uploadFile('./testFiles/Ahorro3.png')
         await nih.testUploadPage.clickContinueBtn()
         await nih.testUploadPage.successfullRedirect()
         
     })
-
  
 })

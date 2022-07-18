@@ -74,7 +74,7 @@ export class PaymentPage {
     this.lastName = faker.name.lastName()
     this.userName = `${faker.name.firstName()}+${faker.datatype.number(1000)}`
     this.email = `${this.userName}@email.ghostinspector.com`
-    this.phoneNumber = '2029998877'
+    this.phoneNumber = '+12029998877'
     this.streetAddress = faker.address.streetAddress()
     this.city = faker.address.city()
     this.county = faker.address.country()

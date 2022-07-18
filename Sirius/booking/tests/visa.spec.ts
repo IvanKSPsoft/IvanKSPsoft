@@ -9,7 +9,7 @@ for (const name of currencieData) {
         const booking = new BookingApp(page)
             
         await page.goto(`https://visa-test.trustassure.app/?currency=${name}`)
-        await booking.mainPage.inputSearchField(booking.mainPage.labAddrees2)
+        await booking.mainPage.inputSearchField(booking.mainPage.labAddrees3)
         await booking.mainPage.clickOnSearchResult()
         await booking.labSearchPage.clickScheduleAppointment()
         await booking.labSearchPage.observeScheduleAppmodal()
@@ -25,7 +25,8 @@ for (const name of currencieData) {
         await booking.paymentPage.selectGenderDropdown()
         await booking.paymentPage.selectStateDropdown()
         // await paymentPage.inputCounty(paymentPage.county)
-        await booking.paymentPage.inputZipCode(booking.paymentPage.zipCode)    
+        await booking.paymentPage.inputZipCode(booking.paymentPage.zipCode)
+        await booking.paymentPage.selectInsurance('No')    
         await booking.paymentPage.qestionaryNewYork()
         await page.waitForTimeout(1000)
         await booking.paymentPage.clickPrivacyContent()

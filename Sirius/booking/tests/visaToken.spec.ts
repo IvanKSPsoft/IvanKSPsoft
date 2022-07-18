@@ -27,8 +27,8 @@ for (const name of currencieData) {
                         providerTripName: "VISA",
                         segments: [{
                         ordinalNumber: 0,
-                        arrivalDateTimeLocal: "2022-07-18T10:00:00+00:00",
-                        departureDateTimeLocal: "2022-07-18T20:00:00+00:00",
+                        arrivalDateTimeLocal: "2022-07-30T10:00:00+00:00",
+                        departureDateTimeLocal: "2022-07-30T20:00:00+00:00",
                         destination: "MIA",
                         destinationCountryCode: "US",
                         origin: "IEV",

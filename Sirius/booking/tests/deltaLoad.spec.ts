@@ -42,7 +42,7 @@ test.describe('load', () => {
   test(`${name}`, async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const trip = await apiUtils.createTrip(url)
+    const trip = await apiUtils.createTripDelta(url)
   })
 })
 }

@@ -1,13 +1,13 @@
 import { test, expect, Page, request} from '@playwright/test';
+import { URLS } from '../pages/utils/apiUrl';
 import { ApiUtils } from '../pages/utils/apiUtils';
-const url = 'https://clx-scus-dev-document-processor.azurewebsites.net/api/v1/form-recognizer/vaccines/file/model'
 
 test.describe.configure({ mode: 'parallel' })
 test.describe('AI Vaccine', () => {
   test('Ahorro.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Ahorro.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Ahorro.pdf')
     expect(response.responseBody.confidence).toEqual(0.23)
     expect(response.fields[18]).toContain('Name                         (0.969) -       No: Edad / Age: 26 anos/years 5 meses/months => Edad Age anos years meses months')
     expect(response.fields[0]).toContain('Dob                         (0.948005) -       No:')
@@ -16,7 +16,7 @@ test.describe('AI Vaccine', () => {
   test('Ahorro3.png', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Ahorro3.png')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Ahorro3.png')
     expect(response.responseBody.confidence).toEqual(0.34)
     expect(response.fields[18]).toContain('Name                         (0.985) -       No: SOM SEADUST => SOM SEADUST')
     expect(response.fields[0]).toContain('Dob                          (0.986) -  Unclear: Hora de Toma / Testing Hour: => ')
@@ -25,7 +25,7 @@ test.describe('AI Vaccine', () => {
   test('Amadita.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Amadita.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Amadita.pdf')
     expect(response.responseBody.confidence).toEqual(0.342)
     expect(response.fields[18]).toContain('Name                         (0.985) -       No: ID Resultado => ID Resultado')
     expect(response.fields[0]).toContain('Dob                         (0.99761325) -       No')
@@ -34,7 +34,7 @@ test.describe('AI Vaccine', () => {
   test('Amatista.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Amatista.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Amatista.pdf')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -       No:")
@@ -43,7 +43,7 @@ test.describe('AI Vaccine', () => {
   test('Amatista.png', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Amatista.png')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Amatista.png')
     expect(response.responseBody.confidence).toEqual(0.342)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.987) -       No:")
@@ -52,7 +52,7 @@ test.describe('AI Vaccine', () => {
   test('AMC1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/AMC1.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/AMC1.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -61,7 +61,7 @@ test.describe('AI Vaccine', () => {
   test('AMC2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/AMC2.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/AMC2.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -70,7 +70,7 @@ test.describe('AI Vaccine', () => {
   test('Amerimed_A.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Amerimed_A.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Amerimed_A.pdf')
     expect(response.responseBody.confidence).toEqual(0.342)
     expect(response.fields[18]).toContain('Name                         (0.985) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -  Unclear:")
@@ -79,7 +79,7 @@ test.describe('AI Vaccine', () => {
   test('Amerimed_B.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Amerimed_B.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Amerimed_B.pdf')
     expect(response.responseBody.confidence).toEqual(0.232)
     expect(response.fields[18]).toContain('Name                          (0.97) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.991) -       No")
@@ -88,7 +88,7 @@ test.describe('AI Vaccine', () => {
   test('Azumed.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Azumed.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Azumed.jpeg')
     expect(response.responseBody.confidence).toEqual(0.344)
     expect(response.fields[18]).toContain('Name                          (0.97) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.996) -       No:")
@@ -97,7 +97,7 @@ test.describe('AI Vaccine', () => {
   test('Azumed2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Azumed2.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Azumed2.pdf')
     expect(response.responseBody.confidence).toEqual(0.347)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -106,7 +106,7 @@ test.describe('AI Vaccine', () => {
   test('BelizeDiagnostic.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/BelizeDiagnostic.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/BelizeDiagnostic.jpeg')
     expect(response.responseBody.confidence).toEqual(0.342)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.988) -  Unclear:")
@@ -115,7 +115,7 @@ test.describe('AI Vaccine', () => {
   test('Biomedica.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Biomedica.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Biomedica.jpeg')
     expect(response.responseBody.confidence).toEqual(0.343)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -  Unclear:")
@@ -124,7 +124,7 @@ test.describe('AI Vaccine', () => {
   test('Biomedica2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Biomedica2.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Biomedica2.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -133,7 +133,7 @@ test.describe('AI Vaccine', () => {
   test('BlueMedical.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/BlueMedical.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/BlueMedical.pdf')
     expect(response.responseBody.confidence).toEqual(0.345)
     expect(response.fields[18]).toContain('Name                          (0.97) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -  Unclear:")
@@ -142,7 +142,7 @@ test.describe('AI Vaccine', () => {
   test('CentroMedicoPuntoCana.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/CentroMedicoPuntoCana.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/CentroMedicoPuntoCana.pdf')
     expect(response.responseBody.confidence).toEqual(0.341)
     expect(response.fields[18]).toContain('Name                         (0.984) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.983) -  Unclear:")
@@ -151,7 +151,7 @@ test.describe('AI Vaccine', () => {
   test('Chopo.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Chopo.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Chopo.pdf')
     expect(response.responseBody.confidence).toEqual(0.345)
     expect(response.fields[18]).toContain('Name                         (0.973) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -  Unclear:")
@@ -160,7 +160,7 @@ test.describe('AI Vaccine', () => {
   test('Costamed1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Costamed1.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Costamed1.pdf')
     expect(response.responseBody.confidence).toEqual(0.344)
     expect(response.fields[18]).toContain('Name                         (0.977) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.989) -  Unclear:")
@@ -169,7 +169,7 @@ test.describe('AI Vaccine', () => {
   test('cvs1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/cvs_2cf2ce19e9284e2393da6153dc831841.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/cvs_2cf2ce19e9284e2393da6153dc831841.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.669) -  Unclear:")
@@ -178,7 +178,7 @@ test.describe('AI Vaccine', () => {
   test('cvs2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/cvs_4edaef2b04034cc7a0b152493e4f0059.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/cvs_4edaef2b04034cc7a0b152493e4f0059.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.669) -  Unclear:")
@@ -187,7 +187,7 @@ test.describe('AI Vaccine', () => {
   test('cvs3.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/cvs_health_0cbb52931de5492b8db46104e9efa41c.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/cvs_health_0cbb52931de5492b8db46104e9efa41c.jpeg')
     expect(response.responseBody.confidence).toEqual(0.233)
     expect(response.fields[18]).toContain('Name                         (0.987) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.721) -  Unclear:")
@@ -196,7 +196,7 @@ test.describe('AI Vaccine', () => {
   test('cvs-positive.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/cvs-positive.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/cvs-positive.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.676) -  Unclear:")
@@ -205,7 +205,7 @@ test.describe('AI Vaccine', () => {
   test('DamHealth.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/DamHealth.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/DamHealth.pdf')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -214,7 +214,7 @@ test.describe('AI Vaccine', () => {
   test('DiAra.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/DiAra.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/DiAra.jpeg')
     expect(response.responseBody.confidence).toEqual(0.313)
     expect(response.fields[18]).toContain('Name                        (0.8403514) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -  Unclear:")
@@ -223,7 +223,7 @@ test.describe('AI Vaccine', () => {
   test('DiAra2.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/DiAra2.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/DiAra2.jpeg')
     expect(response.responseBody.confidence).toEqual(0.195)
     expect(response.fields[18]).toContain('Name                         (0.657) -  Unclear:')
     expect(response.fields[0]).toContain("Dob                          (0.992) -       No:")
@@ -232,7 +232,7 @@ test.describe('AI Vaccine', () => {
   test('DNAfit.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/DNAfit.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/DNAfit.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                         (0.987) -       No:')
     expect(response.fields[0]).toContain("Dob                         (0.98793286) -       No:")
@@ -241,7 +241,7 @@ test.describe('AI Vaccine', () => {
   test('DocHQ.png', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/DocHQ.png')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/DocHQ.png')
     expect(response.responseBody.confidence).toEqual(0.142)
     expect(response.fields[18]).toContain('Name                             (0) -  Unclear:')
     expect(response.fields[0]).toContain("Dob                          (0.988) -  Unclear:")
@@ -250,7 +250,7 @@ test.describe('AI Vaccine', () => {
   test('DoctorHospitalHealthSystem.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/DoctorHospitalHealthSystem.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/DoctorHospitalHealthSystem.pdf')
     expect(response.responseBody.confidence).toEqual(0.181)
     expect(response.fields[18]).toContain('Name                             (0) -  Unclear:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -259,7 +259,7 @@ test.describe('AI Vaccine', () => {
   test('DunaLife.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/DunaLife.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/DunaLife.pdf')
     expect(response.responseBody.confidence).toEqual(0.345)
     expect(response.fields[18]).toContain('Name                         (0.984) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -268,7 +268,7 @@ test.describe('AI Vaccine', () => {
   test('Emedlabs.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Emedlabs.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Emedlabs.pdf')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.987) -       No:")
@@ -277,7 +277,7 @@ test.describe('AI Vaccine', () => {
   test('ExpressTest.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/ExpressTest.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/ExpressTest.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                         (0.987) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -286,7 +286,7 @@ test.describe('AI Vaccine', () => {
   test('GrupoArh.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/GrupoArh.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/GrupoArh.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[18]).toContain('Name                             (0) -  Unclear:')
     expect(response.fields[0]).toContain("Dob                           (0.99) -  Unclear:")
@@ -295,7 +295,7 @@ test.describe('AI Vaccine', () => {
   test('GSI.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/GSI.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/GSI.pdf')
     expect(response.responseBody.confidence).toEqual(0.345)
     expect(response.fields[18]).toContain('Name                         (0.975) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.993) -       No:")
@@ -304,7 +304,7 @@ test.describe('AI Vaccine', () => {
   test('HospitalMetropolitano.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/HospitalMetropolitano.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/HospitalMetropolitano.pdf')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[18]).toContain('Name                         (0.985) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -  Unclear:")
@@ -313,7 +313,7 @@ test.describe('AI Vaccine', () => {
   test('hospiten_A.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/hospiten_A.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/hospiten_A.pdf')
     expect(response.responseBody.confidence).toEqual(0.233)
     expect(response.fields[18]).toContain('Name                         (0.988) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -322,7 +322,7 @@ test.describe('AI Vaccine', () => {
   test('hospiten_b.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/hospiten_b.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/hospiten_b.pdf')
     expect(response.responseBody.confidence).toEqual(0.236)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.608) -  Unclear:")
@@ -331,7 +331,7 @@ test.describe('AI Vaccine', () => {
   test('hospiten_b.png', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/hospiten_b.png')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/hospiten_b.png')
     expect(response.responseBody.confidence).toEqual(0.343)
     expect(response.fields[18]).toContain('Name                         (0.972) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.987) -  Unclear:")
@@ -340,7 +340,7 @@ test.describe('AI Vaccine', () => {
   test('HuellaGenica1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/HuellaGenica1.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/HuellaGenica1.pdf')
     expect(response.responseBody.confidence).toEqual(0.343)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.988) -       No:")
@@ -349,7 +349,7 @@ test.describe('AI Vaccine', () => {
   test('HuellaGenica2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/HuellaGenica2.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/HuellaGenica2.pdf')
     expect(response.responseBody.confidence).toEqual(0.225)
     expect(response.fields[18]).toContain('Name                             (0) -  Unclear:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -358,7 +358,7 @@ test.describe('AI Vaccine', () => {
   test('LabEchandi1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/LabEchandi1.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/LabEchandi1.pdf')
     expect(response.responseBody.confidence).toEqual(0.297)
     expect(response.fields[18]).toContain('Name                         (0.585) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.989) -  Unclear:")
@@ -367,7 +367,7 @@ test.describe('AI Vaccine', () => {
   test('LabEchandi2.png', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/LabEchandi2.png')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/LabEchandi2.png')
     expect(response.responseBody.confidence).toEqual(0.341)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.988) -  Unclear:")
@@ -376,7 +376,7 @@ test.describe('AI Vaccine', () => {
   test('Lapi.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Lapi.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Lapi.pdf')
     expect(response.responseBody.confidence).toEqual(0.343)
     expect(response.fields[18]).toContain('Name                         (0.973) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.987) -       No:")
@@ -385,7 +385,7 @@ test.describe('AI Vaccine', () => {
   test('LMP1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/LMP1.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/LMP1.pdf')
     expect(response.responseBody.confidence).toEqual(0.34)
     expect(response.fields[18]).toContain('Name                         (0.972) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.985) -  Unclear:")
@@ -394,7 +394,7 @@ test.describe('AI Vaccine', () => {
   test('LMP2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/LMP2.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/LMP2.pdf')
     expect(response.responseBody.confidence).toEqual(0.339)
     expect(response.fields[18]).toContain('Name                          (0.97) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -  Unclear:")
@@ -403,7 +403,7 @@ test.describe('AI Vaccine', () => {
   test('Mavelsa.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Mavelsa.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Mavelsa.pdf')
     expect(response.responseBody.confidence).toEqual(0.342)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.986) -       No:")
@@ -412,7 +412,7 @@ test.describe('AI Vaccine', () => {
   test('mds.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/mds_2b199c0f46704453961375fba11a0817.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/mds_2b199c0f46704453961375fba11a0817.pdf')
     expect(response.responseBody.confidence).toEqual(0.234)
     expect(response.fields[18]).toContain('Name                         (0.977) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.612) -  Unclear:")
@@ -421,7 +421,7 @@ test.describe('AI Vaccine', () => {
   test('MDT.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/MDT.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/MDT.jpeg')
     expect(response.responseBody.confidence).toEqual(0.341)
     expect(response.fields[18]).toContain('Name                         (0.985) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.985) -  Unclear:")
@@ -430,7 +430,7 @@ test.describe('AI Vaccine', () => {
   test('MedexLab.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/MedexLab.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/MedexLab.pdf')
     expect(response.responseBody.confidence).toEqual(0.243)
     expect(response.fields[18]).toContain('Name                         (0.115) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -439,7 +439,7 @@ test.describe('AI Vaccine', () => {
   test('MedicalCertificate.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/MedicalCertificate.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/MedicalCertificate.pdf')
     expect(response.responseBody.confidence).toEqual(0.245)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.991) -       No:")
@@ -448,7 +448,7 @@ test.describe('AI Vaccine', () => {
   test('Olab.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Olab.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Olab.pdf')
     expect(response.responseBody.confidence).toEqual(0.341)
     expect(response.fields[18]).toContain('Name                         (0.984) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.985) -       No:")
@@ -457,7 +457,7 @@ test.describe('AI Vaccine', () => {
   test('OlarteYakle.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/OlarteYakle.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/OlarteYakle.jpeg')
     expect(response.responseBody.confidence).toEqual(0.236)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.616) -  Unclear:")
@@ -466,7 +466,7 @@ test.describe('AI Vaccine', () => {
   test('Orthin.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Orthin.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Orthin.pdf')
     expect(response.responseBody.confidence).toEqual(0.342)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -475,7 +475,7 @@ test.describe('AI Vaccine', () => {
   test('ParadisehealthcareServise.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/ParadisehealthcareServise.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/ParadisehealthcareServise.pdf')
     expect(response.responseBody.confidence).toEqual(0.236)
     expect(response.fields[18]).toContain('Name                         (0.975) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.638) -  Unclear:")
@@ -484,7 +484,7 @@ test.describe('AI Vaccine', () => {
   test('QuestDiagnostics.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/QuestDiagnostics.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/QuestDiagnostics.pdf')
     expect(response.responseBody.confidence).toEqual(0.23)
     expect(response.fields[18]).toContain('Name                         (0.967) -       No:')
     expect(response.fields[0]).toContain("Dob                         (0.99194294) -       No:")
@@ -493,7 +493,7 @@ test.describe('AI Vaccine', () => {
   test('Randox.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Randox.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Randox.pdf')
     expect(response.responseBody.confidence).toEqual(0.342)
     expect(response.fields[18]).toContain('Name                         (0.985) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -502,7 +502,7 @@ test.describe('AI Vaccine', () => {
   test('Prenetics.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Prenetics.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Prenetics.pdf')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[18]).toContain('Name                         (0.987) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -511,7 +511,7 @@ test.describe('AI Vaccine', () => {
   test('Referencia.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Referencia.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Referencia.pdf')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[18]).toContain('Name                         (0.985) -       No:')
     expect(response.fields[0]).toContain("Dob                         (0.9976518) -       No:")
@@ -521,7 +521,7 @@ test.describe('AI Vaccine', () => {
   test('SaludDigna.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/SaludDigna.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/SaludDigna.pdf')
     expect(response.responseBody.confidence).toEqual(0.229)
     expect(response.fields[18]).toContain('Name                         (0.985) -       No:')
     expect(response.fields[0]).toContain("Dob                          (0.271) -  Unclear:")
@@ -530,7 +530,7 @@ test.describe('AI Vaccine', () => {
   test('Sanlor.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Sanlor.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Sanlor.pdf')
     expect(response.responseBody.confidence).toEqual(0.341)
     expect(response.fields[18]).toContain('Name                         (0.981) -       No:')
     expect(response.fields[0]).toContain("Dob                              (1) -       No:")
@@ -539,7 +539,7 @@ test.describe('AI Vaccine', () => {
   test('SantLukesHospitals.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/SantLukesHospitals.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/SantLukesHospitals.pdf')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[18]).toContain('Name                         (0.986) -       No:')
     expect(response.fields[0]).toContain("Dob                         (0.9871111) -       No:")

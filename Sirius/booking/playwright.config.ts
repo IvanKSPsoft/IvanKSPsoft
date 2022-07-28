@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: 0,
+  retries: 1,
   workers: process.env.CI ? 1 : 6,
   reporter: [
     ['line'],

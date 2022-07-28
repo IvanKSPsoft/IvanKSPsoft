@@ -26,7 +26,7 @@ const config = {
   reporter: [['line'], ['experimental-allure-playwright']],
   use: {
     browserName: 'chromium',
-    headless: true,
+    headless: false,
     screenshot: 'on',
   
     actionTimeout: 0,

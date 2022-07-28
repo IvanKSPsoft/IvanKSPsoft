@@ -1,14 +1,12 @@
 import { test, Page } from '@playwright/test';
 import { NihApp } from '../pages/nihApp';
-import { TestUploadPage } from '../pages/testUpload-nih-page';
-import { UserInfoPage } from '../pages/userInfo-nih-page';
+import { URLS } from '../pages/utils/apiUrl';
 
-const url = 'https://nih.trustassure.app/userinformation/'
 test.beforeEach(async({page})=> {
     const nih = new NihApp(page)
 
 
-    await page.goto(url)
+    await page.goto(URLS.nihUrl)
     await nih.userInfoPage.inputFirstName()
     await nih.userInfoPage.inputLastName()
     await nih.userInfoPage.inputAddress()

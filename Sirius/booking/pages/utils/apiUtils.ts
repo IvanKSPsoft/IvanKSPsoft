@@ -1,4 +1,5 @@
 import { request, expect, APIRequestContext } from "@playwright/test"
+import { dataSet, vaaVaccineData } from "./apiData"
 import { secret } from "./secret"
 const fs = require('fs')
 
@@ -21,7 +22,7 @@ export class ApiUtils {
         return {responseBody, fields}
     }
 
-    async createTrip(url: string) {
+    async createTripDelta(url: string) {
       const apiContext = await request.newContext({ignoreHTTPSErrors: true})
       const trip = await apiContext.post(url, {
         data: {
@@ -36,8 +37,8 @@ export class ApiUtils {
                 providerTripName: "PNR API4",
                 segments: [{
                 ordinalNumber: 0,
-                arrivalDateTimeLocal: "2022-07-17T10:00:00+00:00",
-                departureDateTimeLocal: "2022-07-17T20:00:00+00:00",
+                arrivalDateTimeLocal: dataSet.dateTimeLocal,
+                departureDateTimeLocal: dataSet.dateTimeLocal,
                 destination: "LHR",
                 destinationCountryCode: "GB",
                 origin: "MIA",
@@ -57,8 +58,109 @@ export class ApiUtils {
       const data = consumers[Object.keys(consumers)[0]]
       const consumerToken = responseBody.consumerToken
       const consumerId = data.consumerId
-      return {consumerId, consumers}
+      return {consumerId, consumers, consumerToken}
   }
 
+  async createTripVisa(url: string) {
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.post(url, {
+      data: {
+        endUserTravelers: [{
+        customerID: "UniqueVisaKey_0x001",
+        firstName: "some",
+        lastName: "test",
+        dateOfBirth: "2000-01-01T00:00:00.000Z",
+        email: "ivan.kovalov+10@spsoft.com"
+        }],
+            endUserTrips: [{
+                tripType: "FLIGHT",
+                providerTripName: "VISA",
+                segments: [{
+                ordinalNumber: 0,
+                arrivalDateTimeLocal: dataSet.dateTimeLocal,
+                departureDateTimeLocal: dataSet.dateTimeLocal,
+                destination: "MIA",
+                destinationCountryCode: "US",
+                origin: "IEV",
+                originCountryCode: "UA"
+                }]
+            }]
+        },
+      headers: {
+        'Ocp-Apim-Subscription-Key': secret.secreetKeyDelta
+      }
+    })
+    expect(trip.ok()).toBeTruthy()
+    const lognResponseJson = await trip.json()
+    const responceObj = lognResponseJson[Object.keys(lognResponseJson)[0]]
+    const token = responceObj.consumerToken
+    return { token }
+  }
+
+  async createTripVAA(url: string) {
+    // convert basic aut to base64
+  const btoa = (str: string) => Buffer.from(str).toString('base64');
+  const credentialsBase64 = btoa(`${secret.httpTestCredentials.username}:${secret.httpTestCredentials.password}`)
+
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.post(url, {
+      data: {
+          endUserTravelers: [
+              {
+                  customerID: "UniqueVAAKey_0x001",
+                  firstName: "some",
+                  lastName: "test",
+                  dateOfBirth: "2000-01-01T00:00:00.000Z",
+                  email: "ivan.kovalov+10@spsoft.com"
+              }
+          ],
+          EndUserTrip: {
+              tripType: "FLIGHT",
+              providerTripName: "VAA",
+              segments: [
+                  {
+                      ordinalNumber: 0,
+                      arrivalDateTimeLocal: dataSet.dateTimeLocal,
+                      departureDateTimeLocal: "2022-08-05T20:00:00+00:00",
+                      destination: "MIA",
+                      destinationCountryCode: "US",
+                      origin: "LCY",
+                      originCountryCode: "GB"
+                  }
+              ]
+          }
+        },
+        headers: {
+          Authorization: `Basic ${credentialsBase64}`
+      }
+    })
+    expect(trip.ok()).toBeTruthy()
+    const response = await trip.json()
+    const token = response.consumerToken
+    const consumers = response.consumers[Object.keys(response.consumers)[0]]
+    const customerId = consumers.customerId
+    const consumerId = consumers.consumerId
+    return { token, customerId, consumerId }
+  }
+
+
+  async uploadVaccineVAA(url: string) {
+    // convert basic aut to base64
+  const btoa = (str: string) => Buffer.from(str).toString('base64');
+  const credentialsBase64 = btoa(`${secret.httpTestCredentials.username}:${secret.httpTestCredentials.password}`)
+
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.post(url, {
+      headers: {
+          Authorization: `Basic ${credentialsBase64}`
+      },
+      data: vaaVaccineData
+    })
+    expect(trip.ok()).toBeTruthy()
+    const response = await trip.json()
+    const documentId = response.documentId
+    expect(response.documentType).toContain('VAX')
+    return { documentId }
+  }
 
 }

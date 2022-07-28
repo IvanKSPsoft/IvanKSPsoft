@@ -1,50 +1,34 @@
 import { test, request, expect, Page } from '@playwright/test';
 import { secreetKey, secret } from '../pages/utils/secret';
 import { BookingApp } from '../pages/bookingApp';
+import { ApiUtils } from '../pages/utils/apiUtils';
+import { URLS } from '../pages/utils/apiUrl';
 
-const currencieData = ['EUR', 'USD'];
+const currencieData = [ 
+    'USD', 'EUR',
+//  'AUD', 'GBP', 'CAD', 'XCD', 'ARS', 'BSD', 'BBD', 'BZD', 'BOB', 'BRL', 'CLP', 'COP', 'CRC',
+// 'CUC', 'CUP', 'GTQ', 'GYD', 'HTG', 'HNL', 'JMD', 'MXN', 'NIO', 'PYG', 'PEN', 'DOP', 'SRD', 'TTD', 'UYU', 
+// 'VEF', 'AFN', 'ALL', 'DZD', 'AOA', 'AMD', 'AWG', 'AZN', 'BHD', 'BDT', 'BYR', 'BMD', 'BTN', 'BOV', 'BWP', 
+// 'BND', 'BGN', 'BIF', 'KHR', 'CVE', 'KYD', 'XOF', 'XAF', 'CNY', 'KMF', 'BAM', 'CZK', 'DKK', 'DJF', 'EGP', 
+// 'ERN', 'EEK', 'ETB', 'FKP', 'FJD', 'CDF', 'GMD', 'GEL', 'GHS', 'GIP', 'GNF', 'HKD', 'HUF', 'ISK', 'INR', 
+// 'IDR', 'IQD', 'ILS', 'JPY', 'JOD', 'KZT', 'KES', 'KRW', 'HRK',  'KWD', 'KGS', 'LAK', 'LVL', 'LBP', 'LSL', 
+// 'LRD', 'LYD', 'LTL', 'MOP', 'MKD', 'MGA', 'MWK', 'MYR', 'MVR', 'MRO', 'MUR', 'MXV', 'MDL', 'MNT', 'MAD', 
+// 'MZN', 'MMK', 'NAD', 'NPR', 'ANG', 'NZD', 'NGN', 'NOK', 'OMR', 'XPF', 'PKR', 'PGK', 'PHP', 'PLN', 'QAR', 
+// 'RON', 'RUB', 'RWF', 'WST', 'STD', 'SAR', 'RSD', 'SCR', 'SLL', 'SGD', 'SBD', 'SOS', 'ZAR', 'LKR', 'SHP', 
+// 'SDG', 'SZL', 'SEK', 'CHF', 'TWD', 'TJS', 'TZS', 'THB', 'TOP', 'TND', 'TRY', 'TMT', 'AED', 'UGX', 'UAH', 
+// 'UZS', 'VUV', 'VND', 'YER', 'ZMW', 'ZWL'
+ ];
 for (const name of currencieData) {
   test.describe('Flow', () => {
-    test.only(`e2e Book Appointment ${name}`, async ({ page }) => {
+    test(`e2e Book Appointment ${name}`, async ({ page }) => {
         const booking = new BookingApp(page),
             currency = name;
 
         const apiContext = await request.newContext({ignoreHTTPSErrors: true})
-        const loginResponse = await apiContext.post('https://siq.azure-api.net/test/mle-documents/api/mle-upload/v2/VISA/VISA_TRAVEL/trips', {
-            headers: {
-                'Ocp-Apim-Subscription-Key': secret.secreetKeyVisa
-            },
-            data: {
-                endUserTravelers: [{
-                customerID: "UniqueVisaKey_0x001",
-                firstName: "some",
-                lastName: "test",
-                dateOfBirth: "2000-01-01T00:00:00.000Z",
-                email: "ivan.kovalov+10@spsoft.com"
-                }],
-                    endUserTrips: [{
-                        tripType: "FLIGHT",
-                        providerTripName: "VISA",
-                        segments: [{
-                        ordinalNumber: 0,
-                        arrivalDateTimeLocal: "2022-07-30T10:00:00+00:00",
-                        departureDateTimeLocal: "2022-07-30T20:00:00+00:00",
-                        destination: "MIA",
-                        destinationCountryCode: "US",
-                        origin: "IEV",
-                        originCountryCode: "UA"
-                        }]
-                    }]
-                }
-           })
-           expect(loginResponse.ok()).toBeTruthy()
-           const lognResponseJson = await loginResponse.json()
-           const responceObj = lognResponseJson[Object.keys(lognResponseJson)[0]]
-           const token = responceObj.consumerToken
-           console.log(token)    
+        const apiUtils = new ApiUtils(apiContext)
+        const trip = await apiUtils.createTripVisa(URLS.visaUrl)  
         
-        const url = `https://visa-test.trustassure.app/?consumerToken=${token}&currency=${currency}`
-        console.log(url)
+        const url = `${URLS.visaBookingUrl}/?consumerToken=${trip.token}&currency=${currency}`
         await page.goto(url)
         await page.waitForTimeout(1000)
         await booking.labSearchPage.closeWelcomeModal()
@@ -56,7 +40,6 @@ for (const name of currencieData) {
         await booking.paymentPage.selectCountryDropdown()
         await booking.paymentPage.inputStreet(booking.paymentPage.streetAddress)
         await booking.paymentPage.selectStateDropdown()
-        // await paymentPage.inputCounty(paymentPage.county)
         await booking.paymentPage.inputZipCode(booking.paymentPage.zipCode)  
         await booking.paymentPage.inputMobile(booking.paymentPage.phoneNumber)
         await booking.paymentPage.selectInsurance('No')
@@ -64,11 +47,12 @@ for (const name of currencieData) {
         await booking.paymentPage.clickPrivacyContent()
         await booking.paymentPage.clickRefoundPolicyContent()  
         await booking.paymentPage.inputCardInfo()
+        await page.locator('table.price-table').screenshot({path: `test-results/valid/${name} currency screenshot.png`})
         await page.waitForNavigation()
         await booking.confirmationPage.clickContinueBtn()
         await booking.finishPage.waitForLoaded()
         await booking.finishPage.clickContinueBtn()
-        console.log(`${currency} + ${token} passed`)
+        console.log(`${currency}  passed`)
     });
 
     

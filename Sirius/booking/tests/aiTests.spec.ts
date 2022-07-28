@@ -1,13 +1,13 @@
 import { test, expect, Page, request} from '@playwright/test';
+import { URLS } from '../pages/utils/apiUrl';
 import { ApiUtils } from '../pages/utils/apiUtils';
-const url = 'https://clx-scus-dev-document-processor.azurewebsites.net/api/v1/form-recognizer/vaccines/file/model'
 
 test.describe.configure({ mode: 'parallel' })
 test.describe('AI tests', () => {
   test('Cerulian-labtest1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Cerulian-labtest1.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Cerulian-labtest1.pdf')
     expect(response.responseBody.confidence).toEqual(0.172)
     expect(response.fields[0]).toContain('Dob                         (0.9992953) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -17,7 +17,7 @@ test.describe('AI tests', () => {
   test('Cerulian-labtest2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/Cerulian-labtest2.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/Cerulian-labtest2.pdf')
     expect(response.responseBody.confidence).toEqual(0.18)
     expect(response.fields[0]).toContain('Dob                         (0.9993758) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -27,7 +27,7 @@ test.describe('AI tests', () => {
   test('ConceptoClinic-labtest.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/ConceptoClinic-labtest.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/ConceptoClinic-labtest.pdf')
     expect(response.responseBody.confidence).toEqual(0.235)
     expect(response.fields[0]).toContain('Dob                          (0.655) -  Unclear:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -37,7 +37,7 @@ test.describe('AI tests', () => {
   test('LloydsPharmacy-labtest1.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/LloydsPharmacy-labtest1.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/LloydsPharmacy-labtest1.jpeg')
     expect(response.responseBody.confidence).toEqual(0.234)
     expect(response.fields[0]).toContain('Dob                         (0.9900088) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -47,7 +47,7 @@ test.describe('AI tests', () => {
   test('LloydsPharmacy-labtest2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/LloydsPharmacy-labtest2.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/LloydsPharmacy-labtest2.pdf')
     expect(response.responseBody.confidence).toEqual(0.35)
     expect(response.fields[0]).toContain('Dob                          (0.987) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -57,7 +57,7 @@ test.describe('AI tests', () => {
   test('LondonMedical-labtest1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/LondonMedical-labtest1.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/LondonMedical-labtest1.pdf')
     expect(response.responseBody.confidence).toEqual(0.343)
     expect(response.fields[0]).toContain('Dob                         (0.9953308) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -67,7 +67,7 @@ test.describe('AI tests', () => {
   test('RapidTests-labtest.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/RapidTests-labtest.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/RapidTests-labtest.jpeg')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[0]).toContain('Dob                          (0.991) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -77,7 +77,7 @@ test.describe('AI tests', () => {
   test('RapidTests2-labtest.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/RapidTests2-labtest.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/RapidTests2-labtest.pdf')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[0]).toContain('Dob                              (1) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -87,7 +87,7 @@ test.describe('AI tests', () => {
   test('UKDiagnostics-labtest1.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/UKDiagnostics-labtest1.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/UKDiagnostics-labtest1.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[0]).toContain('Dob                         (0.99266666) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -97,7 +97,7 @@ test.describe('AI tests', () => {
   test('UKDiagnostics-labtest2.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/UKDiagnostics-labtest2.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/UKDiagnostics-labtest2.jpeg')
     expect(response.responseBody.confidence).toEqual(0.346)
     expect(response.fields[0]).toContain('Dob                          (0.988) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -107,7 +107,7 @@ test.describe('AI tests', () => {
   test('India-2columns-1page-vaccine.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/India-2columns-1page-vaccine.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/India-2columns-1page-vaccine.jpeg')
     expect(response.responseBody.confidence).toEqual(0.347)
     expect(response.fields[0]).toContain('Dob                          (0.989) -       No:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -117,7 +117,7 @@ test.describe('AI tests', () => {
   test('India-2columns-1page-vaccine2.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/India-2columns-1page-vaccine2.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/India-2columns-1page-vaccine2.pdf')
     expect(response.responseBody.confidence).toEqual(0.238)
     expect(response.fields[0]).toContain('Dob                          (0.638) -  Unclear:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -127,7 +127,7 @@ test.describe('AI tests', () => {
   test('India-test1columns-vac.jpeg', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/India-test1columns-vac.jpeg')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/India-test1columns-vac.jpeg')
     expect(response.responseBody.confidence).toEqual(0.233)
     expect(response.fields[0]).toContain('Dob                          (0.661) -  Unclear:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -137,7 +137,7 @@ test.describe('AI tests', () => {
   test('India-test2-2columns-vac.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/India-test2-2columns-vac.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/India-test2-2columns-vac.pdf')
     expect(response.responseBody.confidence).toEqual(0.237)
     expect(response.fields[0]).toContain('Dob                          (0.656) -  Unclear:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')
@@ -147,7 +147,7 @@ test.describe('AI tests', () => {
   test('India-test3-2columns-vac.pdf', async ({ page }) => {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
-    const response = await apiUtils.uploadFile(url, './testFiles/India-test3-2columns-vac.pdf')
+    const response = await apiUtils.uploadFile(URLS.aiUrl, './testFiles/India-test3-2columns-vac.pdf')
     expect(response.responseBody.confidence).toEqual(0.18)
     expect(response.fields[0]).toContain('Dob                          (0.977) -  Unclear:')
     expect(response.fields[17]).toContain('Language                         (0) -      Yes: English')

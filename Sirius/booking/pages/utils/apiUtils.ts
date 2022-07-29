@@ -1,5 +1,5 @@
 import { request, expect, APIRequestContext } from "@playwright/test"
-import { dataSet, vaaVaccineData } from "./apiData"
+import { dataSet } from "./apiData"
 import { secret } from "./secret"
 const fs = require('fs')
 
@@ -98,10 +98,6 @@ export class ApiUtils {
   }
 
   async createTripVAA(url: string) {
-    // convert basic aut to base64
-  const btoa = (str: string) => Buffer.from(str).toString('base64');
-  const credentialsBase64 = btoa(`${secret.httpTestCredentials.username}:${secret.httpTestCredentials.password}`)
-
     const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const trip = await apiContext.post(url, {
       data: {
@@ -131,7 +127,7 @@ export class ApiUtils {
           }
         },
         headers: {
-          Authorization: `Basic ${credentialsBase64}`
+          Authorization: `Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2`
       }
     })
     expect(trip.ok()).toBeTruthy()
@@ -144,23 +140,189 @@ export class ApiUtils {
   }
 
 
-  async uploadVaccineVAA(url: string) {
-    // convert basic aut to base64
-  const btoa = (str: string) => Buffer.from(str).toString('base64');
-  const credentialsBase64 = btoa(`${secret.httpTestCredentials.username}:${secret.httpTestCredentials.password}`)
-
+  async uploadVaccineVAA(url: string, consumerId: string, consumerToken: string) {
     const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const trip = await apiContext.post(url, {
       headers: {
-          Authorization: `Basic ${credentialsBase64}`
+          Authorization: `Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2`
       },
-      data: vaaVaccineData
+      data: {
+        endUserTraveler:{ 
+            consumerId: consumerId,
+            consumerToken: consumerToken,
+            dateOfBirth: "2000-01-01T00:00:00.000Z",
+            email: "ikovalov@siriusiq.com",
+            firstName: "Test",
+            lastName: "Test"
+        },
+        rules : [
+         {
+          validationDate:"2022-05-12T15:00:00+04:00",
+          languages:[
+             "EN",
+             "ES",
+             "FR"
+          ],
+          nameRequirements:{
+          },
+          ageRequirements:{
+              minimalAge:5,
+              maximimAge:80
+          },
+          allowedVaccines: [
+                {
+                    vaccineName: "PFIZER",
+                    validTo: "P14D",
+                    validFrom: "P1Y",
+                    requredDosesCount: 2,
+                    intervalFromLastDose : "P14D"
+                },
+                {
+                    vaccineName: "Moderna",
+                    validTo: "P14D",
+                    validFrom: "P1Y",
+                    requredDosesCount: 2
+                },
+                {
+                    vaccineName: "Janssen",
+                    validTo: "P14D",
+                    validFrom: "P1Y",
+                    requredDosesCount: 1,
+                    boosterDoseRequired: true
+                }
+            ]
+        }],
+        reusable:true,
+        document: {
+            "bodyBase64": "JVBERi0xLjIgCjkgMCBvYmoKPDwKPj4Kc3RyZWFtCkJULyAzMiBUZiggIFlPVVIgVEVYVCBIRVJFICAgKScgRVQKZW5kc3RyZWFtCmVuZG9iago0IDAgb2JqCjw8Ci9UeXBlIC9QYWdlCi9QYXJlbnQgNSAwIFIKL0NvbnRlbnRzIDkgMCBSCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9LaWRzIFs0IDAgUiBdCi9Db3VudCAxCi9UeXBlIC9QYWdlcwovTWVkaWFCb3ggWyAwIDAgMjUwIDUwIF0KPj4KZW5kb2JqCjMgMCBvYmoKPDwKL1BhZ2VzIDUgMCBSCi9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iagp0cmFpbGVyCjw8Ci9Sb290IDMgMCBSCj4+CiUlRU9G",
+            "mimeType": "image/jpeg"
+        }
+      }
     })
     expect(trip.ok()).toBeTruthy()
     const response = await trip.json()
     const documentId = response.documentId
-    expect(response.documentType).toContain('VAX')
+    expect(response.consumerToken).toEqual(consumerToken)
+    expect(response.documentType).toEqual("VAX")
     return { documentId }
+  }
+
+  async uploadTestVAA(url: string, consumerId: string, consumerToken: string) {
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.post(url, {
+      headers: {
+          Authorization: `Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2`
+      },
+      data: {
+        endUserTraveler:{ 
+          consumerId: consumerId,
+          consumerToken: consumerToken,
+          dateOfBirth: "2000-01-01T00:00:00.000Z",
+          email: "ikovalov@siriusiq.com",
+          firstName: "John",
+          lastName: "Doe"}, 
+          document: { 
+              bodyBase64: "JVBERi0xLjIgCjkgMCBvYmoKPDwKPj4Kc3RyZWFtCkJULyA5IFRmKFRlc3QpJyBFVAplbmRzdHJlYW0KZW5kb2JqCjQgMCBvYmoKPDwKL1R5cGUgL1BhZ2UKL1BhcmVudCA1IDAgUgovQ29udGVudHMgOSAwIFIKPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0tpZHMgWzQgMCBSIF0KL0NvdW50IDEKL1R5cGUgL1BhZ2VzCi9NZWRpYUJveCBbIDAgMCA5OSA5IF0KPj4KZW5kb2JqCjMgMCBvYmoKPDwKL1BhZ2VzIDUgMCBSCi9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iagp0cmFpbGVyCjw8Ci9Sb290IDMgMCBSCj4+CiUlRU9G", 
+   mimeType: "image/jpeg" }, 
+   uploadUrl: "https://google.com?dev", 
+   reusable: false, 
+   rules: 
+   [ 
+       { id: "LEG_INTL_US-S5LISJFK", 
+       ageRequirements: { 
+           skip: false, 
+           maximumAge: 0, 
+           minimalAge: 2 }, 
+           validationDate: "2022-05-12T10:00:00+01:00", 
+           allowedTests: 
+           [ {
+                validationDate: "2022-05-12T10:00:00+01:00", 
+           testMetho: "", 
+           testType: "ANTIGEN", 
+           validFrom: "P1D", 
+           validTo: "" }, 
+           { 
+               validationDate: "2022-05-12T10:00:00+01:00", 
+               testMethod: "", 
+               testType: "LAMP", 
+               validFrom: "P1D", 
+               validTo: "" }, 
+               { 
+                   validationDate: "2022-05-12T10:00:00+01:00", 
+                   testMethod: "", 
+                   testType: "NAAT", 
+                   validFrom: "P1D", 
+                   validTo: "" }, 
+                   { 
+                       validationDate: "2022-05-12T10:00:00+01:00", 
+                       testMethod: "", 
+                       testType: "PCR", 
+                       validFrom: "P1D", 
+                       validTo: "" },
+                       { 
+                           validationDate: "2022-05-12T10:00:00+01:00", 
+                           testMethod: "", 
+                           testType: "RT_PCR", 
+                           validFrom: "P1D", 
+                           validTo: "" }, 
+                           { 
+                               validationDate: "2022-05-12T10:00:00+01:00", 
+                               testMethod: "", 
+                               testType: "TMA", 
+                               validFrom: "P1D", 
+                               validTo: "" } ] } ] 
+      }
+        
+    })
+    expect(trip.ok()).toBeTruthy()
+    const response = await trip.json()
+    const documentId = response.documentId
+    expect(response.consumerToken).toEqual(consumerToken)
+    expect(response.documentType).toEqual("TST")
+    return { documentId }
+  }
+
+  async uploadFormVAA(url: string, consumerId: string, consumerToken: string) {
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.post(url, {
+      headers: {
+          Authorization: `Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2`
+      },
+      data: {
+        endUserTraveler: {
+          consumerId: consumerId,
+          consumerToken: consumerToken,
+          dateOfBirth: "2000-01-01T00:00:00.000Z",
+          email: "ikovalov@siriusiq.com",
+          firstName: "John",
+          lastName: "Doe"
+      },
+      rules : [],
+      document: { 
+              bodyBase64: "JVBERi0xLjIgCjkgMCBvYmoKPDwKPj4Kc3RyZWFtCkJULyA5IFRmKFRlc3QpJyBFVAplbmRzdHJlYW0KZW5kb2JqCjQgMCBvYmoKPDwKL1R5cGUgL1BhZ2UKL1BhcmVudCA1IDAgUgovQ29udGVudHMgOSAwIFIKPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0tpZHMgWzQgMCBSIF0KL0NvdW50IDEKL1R5cGUgL1BhZ2VzCi9NZWRpYUJveCBbIDAgMCA5OSA5IF0KPj4KZW5kb2JqCjMgMCBvYmoKPDwKL1BhZ2VzIDUgMCBSCi9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iagp0cmFpbGVyCjw8Ci9Sb290IDMgMCBSCj4+CiUlRU9G", 
+      mimeType: "image/jpeg"
+        }
+      }
+        
+    })
+    expect(trip.ok()).toBeTruthy()
+    const response = await trip.json()
+    const documentId = response.documentId
+    expect(response.consumerToken).toEqual(consumerToken)
+    expect(response.documentType).toEqual("HAS")
+    return { documentId }
+  }
+
+  async getDocumentSataVAA(url: string, documentId: string) {
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.get(url, {
+      headers: {
+          Authorization: `Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2`
+      }  
+    })
+    expect(trip.ok()).toBeTruthy()
+    const response = await trip.json()
+    expect(response.documentId).toEqual(documentId)
   }
 
 }

@@ -11,7 +11,7 @@ test.describe('VAA V3', async()=>{
         const createTrip = await apiUtils.createTripVAA(`${URLS.vaaApi}/trip`)
     })
 
-    test.only('Upload Vaccine', async() => {
+    test('Upload Vaccine', async() => {
         const apiContext = await request.newContext()
         const apiUtils = new ApiUtils(apiContext)
         const createTrip = await apiUtils.createTripVAA(`${URLS.vaaApi}/trip`)
@@ -35,11 +35,27 @@ test.describe('VAA V3', async()=>{
         console.log(uploadForm.documentId)
     })
 
-    test('Get Document State', async() => {
+    test('Get Document by Id', async() => {
         const apiContext = await request.newContext()
         const apiUtils = new ApiUtils(apiContext)
         const createTrip = await apiUtils.createTripVAA(`${URLS.vaaApi}/trip`)
         const uploadForm = await apiUtils.uploadFormVAA(`${URLS.vaaApi}/forms`, createTrip.consumerId, createTrip.token )
-        const getDocumentState = await apiUtils.getDocumentSataVAA(`${URLS.vaaApi}/documents/${uploadForm.documentId}`, uploadForm.documentId)
+        const getDocumentState = await apiUtils.getDocumentByIdVAA(`${URLS.vaaApi}/documents/${uploadForm.documentId}`, uploadForm.documentId)
+    })
+
+    test('Get Document by Token', async() => {
+        const apiContext = await request.newContext()
+        const apiUtils = new ApiUtils(apiContext)
+        const createTrip = await apiUtils.createTripVAA(`${URLS.vaaApi}/trip`)
+        const uploadTest = await apiUtils.uploadFormVAA(`${URLS.vaaApi}/forms`, createTrip.consumerId, createTrip.token )
+        const getDocumentState = await apiUtils.getDocumentByTokenVAA(`${URLS.vaaApi}/documents`, createTrip.token)
+    })
+
+    test.only('Get Document by Consumer Id', async() => {
+        const apiContext = await request.newContext()
+        const apiUtils = new ApiUtils(apiContext)
+        const createTrip = await apiUtils.createTripVAA(`${URLS.vaaApi}/trip`)
+        const uploadTest = await apiUtils.uploadTestVAA(`${URLS.vaaApi}/lab-tests`, createTrip.consumerId, createTrip.token )
+        const getDocumentState = await apiUtils.getDocumentByConsumerVAA(`${URLS.vaaApi}/documents`, createTrip.consumerId)
     })
 })

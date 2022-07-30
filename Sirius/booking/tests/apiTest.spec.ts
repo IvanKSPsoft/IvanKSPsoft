@@ -40,7 +40,7 @@ test('test Olha create Trip', async()=> {
 })
 
 
-test.only('test nuber2', async()=> {
+test('test nuber2', async()=> {
     const apiContext = await request.newContext()
     const get = await apiContext.get(`https://clx-scus-test-api.azurewebsites.net/api/upload/v3/VAA/VA_INTEGRATED_RESERVATION/documents/04f0142a310fed11bd6edc98406f9085`, {
         headers: {

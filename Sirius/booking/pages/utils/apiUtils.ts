@@ -313,7 +313,7 @@ export class ApiUtils {
     return { documentId }
   }
 
-  async getDocumentSataVAA(url: string, documentId: string) {
+  async getDocumentByIdVAA(url: string, documentId: string) {
     const apiContext = await request.newContext({ignoreHTTPSErrors: true})
     const trip = await apiContext.get(url, {
       headers: {
@@ -323,6 +323,36 @@ export class ApiUtils {
     expect(trip.ok()).toBeTruthy()
     const response = await trip.json()
     expect(response.documentId).toEqual(documentId)
+  }
+
+  async getDocumentByTokenVAA(url: string, consumerToken: string) {
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.get(url, {
+      headers: {
+          Authorization: `Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2`
+      }  ,
+      params: {
+        consumerToken: consumerToken
+      }
+    })
+    expect(trip.ok()).toBeTruthy()
+    const response = await trip.json()
+    expect(response[Object.keys(response)[0]].consumerToken).toEqual(consumerToken)
+  }
+
+  async getDocumentByConsumerVAA(url: string, consumerId: string) {
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.get(url, {
+      headers: {
+          Authorization: `Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2`
+      }  ,
+      params: {
+        consumerId: consumerId
+      }
+    })
+    // expect(trip.ok()).toBeTruthy()
+    const response = await trip.json()
+    expect(response[Object.keys(response)[0]].consumerId).toEqual(consumerId)
   }
 
 }

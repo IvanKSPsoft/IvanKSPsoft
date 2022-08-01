@@ -5,7 +5,7 @@ test('Olha create trip Delta',async () => {
     const apiContext = await request.newContext ()
     const createTrip = await apiContext.post ('https://siq.azure-api.net/test/documents/api/upload/v2/trip',{
         headers: {
-            'Ocp-Apim-Subscription-Key': secret.secreetKeyDelta
+            'Ocp-Apim-Subscription-Key': secret.secreetKey
         },
         data: {
             endUserTravelers : [{
@@ -45,7 +45,7 @@ test('Olha get doc Delta', async()=> {
     const apiContext = await request.newContext()
     const get = await apiContext.get(`https://siq.azure-api.net/test/documents/api/upload/v2/documents/f153f0921611ed11bd6edc98406f9085`, {
         headers: {
-            'Ocp-Apim-Subscription-Key': secret.secreetKeyDelta
+            'Ocp-Apim-Subscription-Key': secret.secreetKey
         }
     })
     console.log(get.status())

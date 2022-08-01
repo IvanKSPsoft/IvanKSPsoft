@@ -49,7 +49,7 @@ export class ApiUtils {
             "useCase": "DA_API_UPLOAD"
         },
         headers: {
-          'Ocp-Apim-Subscription-Key': secret.secreetKeyDelta
+          'Ocp-Apim-Subscription-Key': secret.secreetKey
         }
       })
       const responseBody = await trip.json()
@@ -87,13 +87,47 @@ export class ApiUtils {
             }]
         },
       headers: {
-        'Ocp-Apim-Subscription-Key': secret.secreetKeyDelta
+        'Ocp-Apim-Subscription-Key': secret.secreetKey
       }
     })
     expect(trip.ok()).toBeTruthy()
     const lognResponseJson = await trip.json()
     const responceObj = lognResponseJson[Object.keys(lognResponseJson)[0]]
     const token = responceObj.consumerToken
+    return { token }
+  }
+
+  async createTripVAAOld(url: string) {
+    const apiContext = await request.newContext({ignoreHTTPSErrors: true})
+    const trip = await apiContext.post(url, {
+      data: { 
+        consumers: [
+            {
+                firstName: "John",
+                lastName: "Doe",
+                dateOfBirth: "2000-01-01T00:00:00+00:00",
+                email: "ivan.kovalov@spsoft.com"
+            }
+        ],
+        flight: {
+            pnrCode: "VY: ICN KR",
+            flightSegments: [
+                {
+                    origin: "ATL",
+                    destination: "LHR",
+                    departureDateTimeUtc: "2022-08-30T15:00:00.0000000+00:00",
+                    arrivalDateTimeUtc: "2022-08-30T21:10:00.0000000+00:00"
+                }
+            ]
+        }
+    },
+        headers: {
+          'Ocp-Apim-Subscription-Key': secret.secreetKey
+      }
+    })
+    expect(trip.ok()).toBeTruthy()
+    const response = await trip.json()
+    const token = response.consumerToken
     return { token }
   }
 

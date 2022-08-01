@@ -4,5 +4,6 @@ export const URLS = {
     aiUrl: 'https://clx-scus-dev-document-processor.azurewebsites.net/api/v1/form-recognizer/vaccines/file/model',
     nihUrl: 'https://nih.trustassure.app/userinformation/',
     visaBookingUrl : 'https://visa-test.trustassure.app',
-    vaaApi: 'https://clx-scus-test-api.azurewebsites.net/api/upload/v3/VAA/VA_INTEGRATED_RESERVATION'
+    vaaApi: 'https://clx-scus-test-api.azurewebsites.net/api/upload/v3/VAA/VA_INTEGRATED_RESERVATION',
+    vaaApiOld: 'https://siq.azure-api.net/test/labs/api/Consumers/flights/vaa'
 }

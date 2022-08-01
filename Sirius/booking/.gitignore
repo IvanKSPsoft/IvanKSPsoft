@@ -8,3 +8,4 @@
 /allure-report/
 /pages/utils/secret.ts
 /testFiles/
+/node_modules/

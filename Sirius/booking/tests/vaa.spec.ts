@@ -51,7 +51,7 @@ test.describe('VAA V3', async()=>{
         const getDocumentState = await apiUtils.getDocumentByTokenVAA(`${URLS.vaaApi}/documents`, createTrip.token)
     })
 
-    test.only('Get Document by Consumer Id', async() => {
+    test('Get Document by Consumer Id', async() => {
         const apiContext = await request.newContext()
         const apiUtils = new ApiUtils(apiContext)
         const createTrip = await apiUtils.createTripVAA(`${URLS.vaaApi}/trip`)

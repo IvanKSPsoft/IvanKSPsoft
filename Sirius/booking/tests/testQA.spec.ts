@@ -1,10 +1,11 @@
 import { test, expect, Page, request} from '@playwright/test';
+import { secret } from '../pages/utils/secret';
 
 test('Olha create trip Delta',async () => {
     const apiContext = await request.newContext ()
     const createTrip = await apiContext.post ('https://siq.azure-api.net/test/documents/api/upload/v2/trip',{
         headers: {
-            Authorization: 'Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2'
+            'Ocp-Apim-Subscription-Key': secret.secreetKeyDelta
         },
         data: {
             endUserTravelers : [{
@@ -38,18 +39,16 @@ test('Olha create trip Delta',async () => {
     console.log(createTrip.status())
     expect(createTrip.ok()).toBeTruthy()
     const response = await createTrip.json()
-    console.log(response)
 })
 
 test('Olha get doc Delta', async()=> {
     const apiContext = await request.newContext()
     const get = await apiContext.get(`https://siq.azure-api.net/test/documents/api/upload/v2/documents/f153f0921611ed11bd6edc98406f9085`, {
         headers: {
-            Authorization: `Basic dGVzdC1hcGk6Y0hKdlpDMWhjR2s2`
+            'Ocp-Apim-Subscription-Key': secret.secreetKeyDelta
         }
     })
     console.log(get.status())
     expect(get.ok()).toBeTruthy()
     const response = await get.json()
-    console.log(response)
 })

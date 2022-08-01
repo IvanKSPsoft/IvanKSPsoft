@@ -4,7 +4,7 @@ import { ApiUtils } from '../pages/utils/apiUtils';
 import { VaaMvpPage } from '../pages/vaaMvp-page';
 
 
-test('VAA MVP e2e', async({page})=> {
+test('VAA MVP e2e @smoke', async({page})=> {
     const apiContext = await request.newContext()
     const apiUtils = new ApiUtils(apiContext)
     const vaaMvp = new VaaMvpPage(page)

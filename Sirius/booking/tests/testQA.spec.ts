@@ -1,6 +1,6 @@
 import { test, expect, Page, request} from '@playwright/test';
 
-test.only('Olha create trip Delta',async () => {
+test('Olha create trip Delta',async () => {
     const apiContext = await request.newContext ()
     const createTrip = await apiContext.post ('https://siq.azure-api.net/test/documents/api/upload/v2/trip',{
         headers: {

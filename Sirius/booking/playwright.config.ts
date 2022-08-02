@@ -25,7 +25,7 @@ const config: PlaywrightTestConfig = {
     baseURL: 'https://clx-scus-test-trustassure-booking.azurewebsites.net/',
     trace: 'off',
   },
-  grep:[new RegExp("@smoke")],
+  // grep:[new RegExp("@smoke")],
   projects: [
     {
       name: 'chromium',

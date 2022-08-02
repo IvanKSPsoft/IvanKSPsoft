@@ -2,17 +2,19 @@ import { test, Page } from '@playwright/test';
 import { BookingApp } from '../pages/bookingApp';
 import { URLS } from '../pages/utils/apiUrl';
 
-const currencieData = [ 'USD', 'EUR', 'AUD', 'GBP', 'CAD', 'XCD', 'ARS', 'BSD', 'BBD', 'BZD', 'BOB', 'BRL', 'CLP', 'COP', 'CRC',
-                       'CUC', 'CUP', 'GTQ', 'GYD', 'HTG', 'HNL', 'JMD', 'MXN', 'NIO', 'PYG', 'PEN', 'DOP', 'SRD', 'TTD', 'UYU', 
-                       'VEF', 'AFN', 'ALL', 'DZD', 'AOA', 'AMD', 'AWG', 'AZN', 'BHD', 'BDT', 'BYR', 'BMD', 'BTN', 'BOV', 'BWP', 
-                       'BND', 'BGN', 'BIF', 'KHR', 'CVE', 'KYD', 'XOF', 'XAF', 'CNY', 'KMF', 'BAM', 'CZK', 'DKK', 'DJF', 'EGP', 
-                       'ERN', 'EEK', 'ETB', 'FKP', 'FJD', 'CDF', 'GMD', 'GEL', 'GHS', 'GIP', 'GNF', 'HKD', 'HUF', 'ISK', 'INR', 
-                       'IDR', 'IQD', 'ILS', 'JPY', 'JOD', 'KZT', 'KES', 'KRW', 'HRK',  'KWD', 'KGS', 'LAK', 'LVL', 'LBP', 'LSL', 
-                       'LRD', 'LYD', 'LTL', 'MOP', 'MKD', 'MGA', 'MWK', 'MYR', 'MVR', 'MRO', 'MUR', 'MXV', 'MDL', 'MNT', 'MAD', 
-                       'MZN', 'MMK', 'NAD', 'NPR', 'ANG', 'NZD', 'NGN', 'NOK', 'OMR', 'XPF', 'PKR', 'PGK', 'PHP', 'PLN', 'QAR', 
-                       'RON', 'RUB', 'RWF', 'WST', 'STD', 'SAR', 'RSD', 'SCR', 'SLL', 'SGD', 'SBD', 'SOS', 'ZAR', 'LKR', 'SHP', 
-                       'SDG', 'SZL', 'SEK', 'CHF', 'TWD', 'TJS', 'TZS', 'THB', 'TOP', 'TND', 'TRY', 'TMT', 'AED', 'UGX', 'UAH', 
-                       'UZS', 'VUV', 'VND', 'YER', 'ZMW', 'ZWL' ]
+const currencieData = [ 'USD',
+                      // 'EUR', 'AUD', 'GBP', 'CAD', 'XCD', 'ARS', 'BSD', 'BBD', 'BZD', 'BOB', 'BRL', 'CLP', 'COP', 'CRC',
+                      //  'CUC', 'CUP', 'GTQ', 'GYD', 'HTG', 'HNL', 'JMD', 'MXN', 'NIO', 'PYG', 'PEN', 'DOP', 'SRD', 'TTD', 'UYU', 
+                      //  'VEF', 'AFN', 'ALL', 'DZD', 'AOA', 'AMD', 'AWG', 'AZN', 'BHD', 'BDT', 'BYR', 'BMD', 'BTN', 'BOV', 'BWP', 
+                      //  'BND', 'BGN', 'BIF', 'KHR', 'CVE', 'KYD', 'XOF', 'XAF', 'CNY', 'KMF', 'BAM', 'CZK', 'DKK', 'DJF', 'EGP', 
+                      //  'ERN', 'EEK', 'ETB', 'FKP', 'FJD', 'CDF', 'GMD', 'GEL', 'GHS', 'GIP', 'GNF', 'HKD', 'HUF', 'ISK', 'INR', 
+                      //  'IDR', 'IQD', 'ILS', 'JPY', 'JOD', 'KZT', 'KES', 'KRW', 'HRK',  'KWD', 'KGS', 'LAK', 'LVL', 'LBP', 'LSL', 
+                      //  'LRD', 'LYD', 'LTL', 'MOP', 'MKD', 'MGA', 'MWK', 'MYR', 'MVR', 'MRO', 'MUR', 'MXV', 'MDL', 'MNT', 'MAD', 
+                      //  'MZN', 'MMK', 'NAD', 'NPR', 'ANG', 'NZD', 'NGN', 'NOK', 'OMR', 'XPF', 'PKR', 'PGK', 'PHP', 'PLN', 'QAR', 
+                      //  'RON', 'RUB', 'RWF', 'WST', 'STD', 'SAR', 'RSD', 'SCR', 'SLL', 'SGD', 'SBD', 'SOS', 'ZAR', 'LKR', 'SHP', 
+                      //  'SDG', 'SZL', 'SEK', 'CHF', 'TWD', 'TJS', 'TZS', 'THB', 'TOP', 'TND', 'TRY', 'TMT', 'AED', 'UGX', 'UAH', 
+                      //  'UZS', 'VUV', 'VND', 'YER', 'ZMW', 'ZWL' 
+                      ]
 for (const name of currencieData) {
   test.describe('Flow', () => {
     test(`e2e Book Appointment ${name}`, async ({ page }) => {

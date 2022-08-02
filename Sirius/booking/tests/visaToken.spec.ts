@@ -1,5 +1,4 @@
 import { test, request, expect, Page } from '@playwright/test';
-import { secreetKey, secret } from '../pages/utils/secret';
 import { BookingApp } from '../pages/bookingApp';
 import { ApiUtils } from '../pages/utils/apiUtils';
 import { URLS } from '../pages/utils/apiUrl';

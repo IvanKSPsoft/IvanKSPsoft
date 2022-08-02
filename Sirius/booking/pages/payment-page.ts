@@ -61,7 +61,7 @@ export class PaymentPage {
     insuranceNoLocator = '[name="Do you have insurance?"][value=No"]',
     stripeFrameLocator = 'iframe[title="Secure card payment input frame"]',
     striprPayBtnLocator = '#btn-submit',
-    inputFormLocaror = '.dxbs-form-control.text-truncate',
+    inputFormLocaror = '.dxbs-editor-input-container input',
     MemberIDFieldLocator = '[name="What is your member ID?"]',
     groupNumberFieldLocator ='[name="What is your Group Number?"]',
     priceLocator = 'tr span',
@@ -101,10 +101,10 @@ export class PaymentPage {
     this.ccv = page.frameLocator(stripeFrameLocator).locator('[placeholder="CVC"]')
     this.cradZipCode = page.frameLocator(stripeFrameLocator).locator('[placeholder="ZIP"]')
     this.stripePayBtn = page.locator(striprPayBtnLocator)
-    this.inputInsuranceForm = page.locator(inputFormLocaror).first()
-    this.inputInsuranceAddress = page.locator(inputFormLocaror).nth(1)
-    this.inputInsuranceCity = page.locator(inputFormLocaror).nth(2)
-    this.inputInsuranceZipCode = page.locator(inputFormLocaror).nth(3)
+    this.inputInsuranceForm = page.locator(inputFormLocaror).nth(1)
+    this.inputInsuranceAddress = page.locator(inputFormLocaror).nth(2)
+    this.inputInsuranceCity = page.locator(inputFormLocaror).nth(3)
+    this.inputInsuranceZipCode = page.locator(inputFormLocaror).nth(4)
     this.memberidField = page.locator(MemberIDFieldLocator)
     this.groupNumberField = page.locator(groupNumberFieldLocator)
     this.insurancePrice = page.locator(priceLocator).first()
@@ -263,7 +263,6 @@ export class PaymentPage {
     await this.cardZipCodeInput()
     await this.stripePayBtn.isVisible()
     await this.stripePayBtn.click()
-    // await this.page.waitForTimeout(20000)
   }
 
   async failPaymentModal() {
@@ -275,8 +274,10 @@ export class PaymentPage {
       await this.inputInsuranceForm.fill('Insurance')
       await this.inputInsuranceAddress.type(`${faker.address.streetAddress()}`)
       await this.inputInsuranceCity.type(`${faker.address.city()}`)
-      await this.inputInsuranceZipCode.type(`11111`)
+      await this.inputInsuranceZipCode.fill(`55555`)
+      await this.memberidField.click()
       await this.page.locator('text=Insurance company State Armed Forces AmericaArmed Forces EuropeAlaskaAlabamaArme >> select').selectOption('AK')
+      await this.page.waitForTimeout(1000)
       await this.memberidField.fill('123456')
       await this.groupNumberField.fill('123456')
   }

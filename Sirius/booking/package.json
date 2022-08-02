@@ -9,6 +9,7 @@
     "ai": "npx playwright test /ai.spec.ts && npx playwright test /aiVaccinesPt2.spec.ts && npx playwright test /aiTests.spec.ts",
     "api": "npx playwright test /vaa.spec.ts && npx playwright test /deltaApi.spec.ts",
     "smoke": "npx playwright test --grep @smoke",
+    "e2e": "npx playwright test /visaToken.spec.ts && npx playwright test /visa.spec.ts && npx playwright test /booking.spec.ts && npx playwright test /nih.spec.ts && npx playwright test /vaaMvp.spec.ts",
     "visaToken": "npx playwright test /visaToken.spec.ts",
     "visa": "npx playwright test /visa.spec.ts",
     "booking": "npx playwright test /booking.spec.ts",
